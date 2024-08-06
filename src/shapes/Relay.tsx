@@ -1,49 +1,9 @@
-// import React, { FC, useEffect, useRef } from "react";
-
-// interface RelayProps {
-//   x: number;
-//   y: number;
-//   onMouseDown: () => void;
-// }
-
-// const Relay: FC<RelayProps> = ({ x, y, onMouseDown }) => {
-//   const elementRef = useRef<SVGGElement>(null);
-
-//   useEffect(() => {
-//     const element = elementRef.current;
-
-//     const handleMouseDown = (e: MouseEvent) => {
-//       onMouseDown();
-//     };
-
-//     element?.addEventListener("mousedown", handleMouseDown);
-
-//     return () => {
-//       element?.removeEventListener("mousedown", handleMouseDown);
-//     };
-//   }, [onMouseDown]);
-
-//   return (
-//     <g ref={elementRef} fill="white" stroke="black" strokeWidth="0.5">
-//       <circle cx={x + 22} cy={y} r="5" />
-//       <circle cx={x + 11} cy={y} r="5" />
-//       <circle cx={x} cy={y} r="5" />
-//       <circle cx={x - 11} cy={y} r="5" />
-//       <circle cx={x - 22} cy={y} r="5" />
-//       <circle cx={x - 33} cy={y} r="5" />
-//     </g>
-//   );
-// };
-
-// export default Relay;
-
-
-import React, { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
+import { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
 
 interface Shape {
   name: string;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
   radius?: number;
   id:string
 }
@@ -74,7 +34,7 @@ useEffect(()=>{
   if(isClicked.current){
     setCoord({x:newCoordOnMove.x-offset.x+radius,y:newCoordOnMove.y-offset.y+radius});
 }
-},[newCoordOnMove])
+},[newCoordOnMove,offset,radius])
 
 const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
   const rect = elementRef.current?.getBoundingClientRect();

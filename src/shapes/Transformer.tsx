@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from "react"
+import { MouseEventHandler, useEffect, useRef, useState } from "react"
 
 interface transformerProps{
     id:string,
@@ -9,6 +9,7 @@ interface transformerProps{
 
 export default function Transformer(props:transformerProps){
     const {x,y,id,newCoordOnMove} = props
+    const scale = 0.6
 
     // const scalingFactor = 0.4;
     const elementRef = useRef<SVGGElement>(null);
@@ -22,6 +23,7 @@ export default function Transformer(props:transformerProps){
         // console.log(rect,radius,coord);
         setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y})
         isClicked.current = true;
+        console.log(rect,coord)
       }
       const handleMouseUp = ()=>{
         isClicked.current = false;
@@ -30,13 +32,13 @@ export default function Transformer(props:transformerProps){
         if(isClicked.current){
             setCoord({x:newCoordOnMove.x-offset.x,y:newCoordOnMove.y-offset.y})
         }
-      },[newCoordOnMove])
+      },[newCoordOnMove,offset])
     return(
     <g ref={elementRef}
     id={id}
     onMouseDown={handleMouseDown}
     onMouseUp = {handleMouseUp}
-    transform={`translate(${coord.x} ${coord.y})`}
+    transform={`translate(${coord.x} ${coord.y}) scale(${scale})`}
     >
     <ellipse cx={127.5 + x} cy={127.5 + y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
     <ellipse cx={167.5 + x} cy={127.5 + y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>

@@ -1,14 +1,15 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
-import Transformer from './components/Transformer';
-import Relay from './components/Relay';
-import Inverter from './components/Inverter';
+import { MouseEventHandler, useState } from 'react';
+import Transformer from './shapes/Transformer';
+import Relay from './shapes/Relay';
+import Inverter from './shapes/Inverter';
 import qwert from './jsonFiles/shapes.json'
+import Breaker from './shapes/Breaker';
 
 // Define types for shape objects if needed
 interface Shape {
   name: string;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
   radius?: number;
   id:string
 }
@@ -33,11 +34,14 @@ function App() {
     setChildCoord({ x: e.clientX, y: e.clientY });
   };
 
-  useEffect(()=>{
-    console.log(shapes)
-  },[shapes])
+  // useEffect(()=>{
+  //   console.log(shapes)
+  // },[shapes])
 
   return (
+    <>
+    <div className="app">
+      <div className="menu"></div>
     <svg width="100vw" height="100vh" onMouseMove={handleMouseMove}>
       {/* Conditionally render components based on the shapes state */}
       {shapes.map((shape, index) => {
@@ -48,8 +52,8 @@ function App() {
               key={index}
               name={shape.name}
                 id={shape.id}
-                x={shape.x || 0}
-                y={shape.y || 0}
+                x={shape.x}
+                y={shape.y}
                 radius={shape.radius || 30}
                 newCoordOnMove={childCoord}
                 getData = {getData}
@@ -60,8 +64,8 @@ function App() {
               <Transformer
               key={index}
               id={shape.id}
-                x={shape.x || 0}
-                y={shape.y || 0}
+                x={shape.x}
+                y={shape.y}
                 newCoordOnMove={childCoord}
               />
             );
@@ -70,8 +74,18 @@ function App() {
               <Inverter
               key={index}
               id={shape.id}
-                x={shape.x || 0}
-                y={shape.y || 0}
+                x={shape.x}
+                y={shape.y}
+                newCoordOnMove={childCoord}
+              />
+            );
+            case "Breaker":
+            return (
+              <Breaker
+              key={index}
+              id={shape.id}
+                x={shape.x}
+                y={shape.y}
                 newCoordOnMove={childCoord}
               />
             );
@@ -80,6 +94,8 @@ function App() {
         }
       })}
     </svg>
+    </div>
+    </>
   );
 }
 
