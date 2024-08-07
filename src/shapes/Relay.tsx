@@ -24,12 +24,6 @@ const Relay: FC<RelayProps> = ({name, x, y, id, radius, newCoordOnMove,getData})
   const [coord,setCoord]= useState({x,y});
   const [offset,setOffset] = useState({x:0,y:0})
   
-//   const off
-//   const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-//     isClicked.current = true
-//     // setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y});
-//     // onMouseDown()
-// }
 useEffect(()=>{
   if(isClicked.current){
     setCoord({x:newCoordOnMove.x-offset.x+radius,y:newCoordOnMove.y-offset.y+radius});
