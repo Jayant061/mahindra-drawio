@@ -1,0 +1,31 @@
+import "./Topbar.css"
+import homeImg from "../../assets/home.png"
+import triangleDown from "../../assets/triangleDown.png";
+import playIcon from "../../assets/play.png";
+import { useState } from "react";
+
+function Topbar() {
+  const [isCompleteDisabled,setIsCompleteDisabled] = useState(true)
+  return (
+    <>
+    <div className="topbarContainer">
+        <span className="homeIcon">
+            <img src={homeImg} alt="home"/>
+            <img src={triangleDown} alt="more" style={{width:"0.7rem"}} />
+        </span>
+        <span className="heading">
+          SLD 001
+        </span>
+        <div className="btns">
+          <button><img src={playIcon} alt="preview" /></button>
+          <button onClick={()=>{setIsCompleteDisabled(prev=>!prev)}}>Save Draft</button>
+          <button disabled={isCompleteDisabled} style={isCompleteDisabled?{backgroundColor:"rgba(255, 255, 255, 0.8)"}:
+          {backgroundColor:"#8BBB04",color:"white"}}
+          >Complete</button>
+        </div>
+    </div>
+    </>
+  )
+}
+
+export default Topbar

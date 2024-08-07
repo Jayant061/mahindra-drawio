@@ -17,120 +17,122 @@ function Breaker(props:BreakerProps) {
     const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
         const rect = elementRef.current?.getBoundingClientRect();
         if(!rect) return;
-        console.log(rect,coord);
-        setOffset({x:e.clientX-rect.x,y:e.clientY-rect.y})
+        // console.log(rect,coord);
+        setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y})
         isClicked.current = true;
       }
       const handleMouseUp = ()=>{
         isClicked.current = false;
       }
 
-
+  
       useEffect(()=>{
         if(isClicked.current){
-            setCoord({x:newCoordOnMove.x-offset.x-2,y:newCoordOnMove.y-offset.y-5.6})
+            setCoord({x:newCoordOnMove.x-offset.x,y:newCoordOnMove.y-offset.y})
         }
 
       },[newCoordOnMove,offset])
   return (
-    <g transform={`translate(${coord.x} ${coord.y})`} ref={elementRef}
-    onMouseDown={handleMouseDown}
-    onMouseUp={handleMouseUp}
-    id={id}
-    >
-      <path
-        d={`M ${25* scale} ${214 *scale} L ${25 *scale} ${14 *scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <ellipse
-        cx={25 * scale}
-        cy={74 * scale}
-        rx={10 * scale}
-        ry={10 * scale}
-        fill="#80ff00"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        pointerEvents="all"
-      />
-      <ellipse
-        cx={25 * scale}
-        cy={154 * scale}
-        rx={10 * scale}
-        ry={10 * scale}
-        fill="#80ff00"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        pointerEvents="all"
-      />
-      <path
-        d={`M ${25 * scale} ${184 * scale} L ${45 * scale} ${164 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${184 * scale} L ${5 * scale} ${164 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${44 * scale} L ${5 * scale} ${64 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${44 * scale} L ${45 * scale} ${64 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${16 * scale} L ${5 * scale} ${36 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${16 * scale} L ${45 * scale} ${36 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${211 * scale} L ${45 * scale} ${191 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-      <path
-        d={`M ${25 * scale} ${211 * scale} L ${5 * scale} ${191 * scale}`}
-        fill="none"
-        stroke="#66ff66"
-        strokeWidth={7 * scale}
-        strokeMiterlimit="10"
-        pointerEvents="stroke"
-      />
-    </g>
+  <g transform={`translate(${coord.x} ${coord.y}) scale(${scale})`} 
+  ref={elementRef}
+  onMouseDown={handleMouseDown}
+  onMouseUp={handleMouseUp}
+  id={id}
+>
+  <path
+    d={`M ${25 + x} ${214 + y} L ${25 + x} ${14 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <ellipse
+    cx={25 + x}
+    cy={74 + y}
+    rx={10}
+    ry={10}
+    fill="#80ff00"
+    stroke="#66ff66"
+    strokeWidth={7}
+    pointerEvents="all"
+  />
+  <ellipse
+    cx={25 + x}
+    cy={154 + y}
+    rx={10}
+    ry={10}
+    fill="#80ff00"
+    stroke="#66ff66"
+    strokeWidth={7}
+    pointerEvents="all"
+  />
+  <path
+    d={`M ${25 + x} ${184 + y} L ${45 + x} ${164 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${184 + y} L ${5 + x} ${164 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${44 + y} L ${5 + x} ${64 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${44 + y} L ${45 + x} ${64 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${16 + y} L ${5 + x} ${36 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${16 + y} L ${45 + x} ${36 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${211 + y} L ${45 + x} ${191 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+  <path
+    d={`M ${25 + x} ${211 + y} L ${5 + x} ${191 + y}`}
+    fill="none"
+    stroke="#66ff66"
+    strokeWidth={7}
+    strokeMiterlimit="10"
+    pointerEvents="stroke"
+  />
+</g>
+
   )
 }
 

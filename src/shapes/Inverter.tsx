@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
+import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
  
 interface InverterProps {
 //   uniqueId: string;
@@ -22,7 +22,9 @@ const Inverter: FC<InverterProps> = ({  x, y, id, newCoordOnMove  }) => {
   
   const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
       isClicked.current = true;
-      console.log(id)
+      const rect = elementRef.current?.getBoundingClientRect();
+      console.log(rect)
+      // console.log(id)
       setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y});
       // onMouseDown()
   }
@@ -39,6 +41,7 @@ const Inverter: FC<InverterProps> = ({  x, y, id, newCoordOnMove  }) => {
 
       if(isClicked.current){
           setcoordinate(newCoordOnMove.x-offset.x,newCoordOnMove.y-offset.y);
+          console.log(coord)
         // setTransform(`translate(${newCoordOnMove.x-offset.x} ${newCoordOnMove.y-offset.y})`)
       }
 
@@ -51,7 +54,7 @@ const Inverter: FC<InverterProps> = ({  x, y, id, newCoordOnMove  }) => {
       fill="white"
       stroke="green"
       strokeWidth="0.5"
-      id={`Inverter`}
+      id={`Inverter${id}`}
       transform={`translate(${coord.x} ${coord.y})`}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}

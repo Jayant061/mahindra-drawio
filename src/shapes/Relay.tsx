@@ -32,19 +32,13 @@ const Relay: FC<RelayProps> = ({name, x, y, id, radius, newCoordOnMove,getData})
 // }
 useEffect(()=>{
   if(isClicked.current){
-    setCoord({x:newCoordOnMove.x-offset.x+radius,y:newCoordOnMove.y-offset.y+radius});
+    setCoord({x:newCoordOnMove.x-offset.x,y:newCoordOnMove.y-offset.y});
 }
 },[newCoordOnMove,offset,radius])
 
 const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-  const rect = elementRef.current?.getBoundingClientRect();
-  if(!rect) return;
-  const origin = {
-    x:rect?.x,
-    y:rect?.y
-  }
   // console.log(rect,radius,coord);
-  setOffset({x:e.clientX-origin.x,y:e.clientY-origin.y})
+  setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y})
   isClicked.current = true
   // console.log(id)
 }

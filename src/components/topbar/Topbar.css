@@ -1,0 +1,49 @@
+div.topbarContainer{
+    background-color: #0B242D;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    .homeIcon{
+        width: 84px;
+        height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: 2px;
+        gap: 0.5rem;
+        img{
+          width: 2rem;  
+        }
+    }
+    span.heading{
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    div.btns{
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        button{
+            background-color: #f6f6f6;
+            color: #707070;
+            padding:0.25rem 0.5rem;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            cursor: pointer;
+            img{
+                width: 2rem;
+            }
+        }
+    }
+}
