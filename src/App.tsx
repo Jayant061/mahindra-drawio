@@ -1,14 +1,13 @@
 import { MouseEventHandler, useState } from "react";
-import Transformer from "./shapes/Transformer";
+import qwert from "./jsonFiles/shapes.json"
+import "../App.css"
+import Topbar from "./Components/Topbar/Topbar";
+import Leftbar from "./Components/LeftSidebar/Leftbar";
+import Menu from "./Components/Menu/Menu";
 import Relay from "./shapes/Relay";
+import Transformer from "./shapes/Transformer";
 import Inverter from "./shapes/Inverter";
-import qwert from "./jsonFiles/shapes.json";
 import Breaker from "./shapes/Breaker";
-import "./App.css"
-import Topbar from "./components/topbar/Topbar";
-import Leftbar from "./components/leftSidebar/Leftbar";
-import Menu from './Components/Menu/Menu.tsx';
-import './App.css'
 
 interface Shape {
   name: string;
@@ -18,7 +17,7 @@ interface Shape {
   id:string
 }
 
-function App() {
+function Temp() {
   // Define the initial state with types for shapes
   const [shapes, setShapes] = useState<Shape[]>(qwert);
 
@@ -41,7 +40,16 @@ function App() {
   return (
     <>
     <div className="app">
-      <div className="menu"></div>
+      <div className="topbar">
+        <Topbar/>
+      </div>
+      <div className="container">
+      <div className="leftbar">
+        <Leftbar/>
+      </div>
+      <div className="menu">
+        <Menu/>
+      </div>
     <svg width="100vw" height="100vh" onMouseMove={handleMouseMove}>
       {/* Conditionally render components based on the shapes state */}
       {shapes.map((shape, index) => {
@@ -95,8 +103,9 @@ function App() {
       })}
     </svg>
     </div>
+    </div>
     </>
   );
 }
 
-export default App;
+export default Temp;

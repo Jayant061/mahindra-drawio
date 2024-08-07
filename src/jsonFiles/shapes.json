@@ -1,3 +1,6 @@
 [
-  { "id": "003", "name": "Inverter", "x": 0, "y": 0, "radius": 30 }
+  { "id": "001", "name": "Inverter", "x": 50, "y": 50, "radius": 30 },
+  { "id": "002", "name": "Transformer", "x": 50, "y": 100, "radius": 30 },
+  { "id": "003", "name": "Relay", "x": 50, "y": 150, "radius": 30 },
+  { "id": "004", "name": "Breaker", "x": 50, "y": 200, "radius": 30 }
 ]
