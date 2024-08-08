@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  :root{
+    --bg-color: #fff;
+  --line-color-1: rgba(112, 112, 112, 0.2);
+  --line-color-2: #a9a9a979;
+  }
+  .app  {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    
+    /* .drawingArea {} */
+  }
+  
+  div.container {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    .svg{
+      width:65%;
+      position: relative;
+      svg {
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-color);
+        background-image: 
+        conic-gradient(at calc(100% - 1px) calc(100% - 1px),var(--line-color-1) 270deg, #0000 0),
+        conic-gradient(at calc(100% - 1px) calc(100% - 1px),var(--line-color-1) 270deg, #0000 0);
+      background-size: 50px 50px, 10px 10px;
+      
+        g {
+          cursor: all-scroll;
+        }
+      }
+    }
+    div.leftbar {
+      width: 17%;
+      box-shadow: 2px 0 2px  lightgray;
+      z-index: 2;
+    }
+    .menu {
+      position: absolute;
+      padding: 1.5rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: row-reverse;
+      flex-wrap:nowrap;
+    }
+     
+    }
+  
+  

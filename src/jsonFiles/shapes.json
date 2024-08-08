@@ -2,5 +2,7 @@
   { "id": "001", "name": "Inverter", "x": 50, "y": 50, "radius": 30 },
   { "id": "002", "name": "Transformer", "x": 50, "y": 100, "radius": 30 },
   { "id": "003", "name": "Relay", "x": 50, "y": 150, "radius": 30 },
-  { "id": "004", "name": "Breaker", "x": 50, "y": 200, "radius": 30 }
+  { "id": "004", "name": "Breaker", "x": 50, "y": 200, "radius": 30 },
+  { "id": "005", "name": "Annuciator", "x": 50, "y": 250 },
+  { "id": "006", "name": "Energy Meter", "x": 50, "y": 300 ,"radius":30}
 ]

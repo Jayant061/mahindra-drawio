@@ -6,8 +6,8 @@ div.topbarContainer{
     align-items: center;
     color: white;
     .homeIcon{
-        width: 84px;
-        height: 52px;
+        width: 5rem;
+        height: 3rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -18,12 +18,13 @@ div.topbarContainer{
           width: 2rem;  
         }
     }
-    span.heading{
+    div.heading{
         flex: 1;
-        text-align: center;
         font-weight: 600;
         font-size: 1.5rem;
         letter-spacing: 1px;
+        display: flex;
+        justify-content: center;
     }
     div.btns{
         display: flex;

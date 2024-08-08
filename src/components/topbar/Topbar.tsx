@@ -13,9 +13,7 @@ function Topbar() {
             <img src={homeImg} alt="home"/>
             <img src={triangleDown} alt="more" style={{width:"0.7rem"}} />
         </span>
-        <span className="heading">
-          SLD 001
-        </span>
+        <div className="heading"><span>SLD 001</span></div>
         <div className="btns">
           <button><img src={playIcon} alt="preview" /></button>
           <button onClick={()=>{setIsCompleteDisabled(prev=>!prev)}}>Save Draft</button>

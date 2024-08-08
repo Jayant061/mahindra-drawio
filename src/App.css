@@ -29,12 +29,6 @@ div.container {
     min-width: 300px;
     box-shadow: 2px 0 2px  lightgray;
   }
-    svg {
-      width: 70%;
-      height: 100vh;
-      g {
-        cursor: all-scroll;
-      }
-    }
+    
   }
 
