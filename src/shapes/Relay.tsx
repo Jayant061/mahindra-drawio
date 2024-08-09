@@ -1,12 +1,5 @@
 import { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
-
-interface Shape {
-  name: string;
-  x: number;
-  y: number;
-  radius?: number;
-  id:string
-}
+import { Shape } from "../utils/Shape";
 
 interface RelayProps {
   x: number;
@@ -16,9 +9,11 @@ interface RelayProps {
   radius:number
   getData:(id:string,data:Shape)=>void
   name:string
+  zoomLevel:number,
+  className:string
 }
 
-const Relay: FC<RelayProps> = ({name, x, y, id, radius, newCoordOnMove,getData}) => {
+const Relay: FC<RelayProps> = ({name, x, y, id, radius, newCoordOnMove,getData,zoomLevel,className}) => {
   const elementRef = useRef<SVGGElement>(null);
   const isClicked = useRef<boolean>(false);
   const [coord,setCoord]= useState({x,y});
@@ -26,13 +21,16 @@ const Relay: FC<RelayProps> = ({name, x, y, id, radius, newCoordOnMove,getData})
   
 useEffect(()=>{
   if(isClicked.current){
-    setCoord({x:newCoordOnMove.x-offset.x,y:newCoordOnMove.y-offset.y});
+    setCoord(
+      {x:(newCoordOnMove.x-offset.x)/zoomLevel,
+        y:(newCoordOnMove.y-offset.y)/zoomLevel
+      });
 }
 },[newCoordOnMove,offset,radius])
 
 const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
   // console.log(rect,radius,coord);
-  setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y})
+  setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
   isClicked.current = true
   // console.log(id)
 }
@@ -50,6 +48,7 @@ for(let i =0;i<=5;i++){
 }
   return (
     <g ref={elementRef} fill="white" stroke="black" strokeWidth="0.5" x={x} y={y}
+    className={className}
     onMouseDown={handleMouseDown}
     onMouseUp={handleMouseUp}>
       {arr}

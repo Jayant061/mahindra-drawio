@@ -1,15 +1,19 @@
 import { MouseEventHandler, useEffect, useRef, useState } from "react"
+import { Shape } from "../utils/Shape"
 
 interface transformerProps{
     id:string,
     x:number,//left coord
     y:number,// top coord
     newCoordOnMove:{x:number,y:number}
+    zoomLevel:number,
+    getData:(id:string,data:Shape)=>void
+    name:string
 }
 
 export default function Transformer(props:transformerProps){
-    const {x,y,id,newCoordOnMove} = props
-    const scale = 0.6
+    const {x,y,id,newCoordOnMove,zoomLevel,getData,name} = props
+    const scale = 1
 
     // const scalingFactor = 0.4;
     const elementRef = useRef<SVGGElement>(null);
@@ -17,42 +21,50 @@ export default function Transformer(props:transformerProps){
     const[coord,setCoord] = useState({x:x,y:y});
     const isClicked = useRef<boolean>(false);
 
+    useEffect(()=>{
+      if(isClicked.current){
+        setCoord(
+          {x:(newCoordOnMove.x-offset.x)/zoomLevel,
+            y:(newCoordOnMove.y-offset.y)/zoomLevel
+          });
+    }
+    },[newCoordOnMove,offset])
+    
     const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-        const rect = elementRef.current?.getBoundingClientRect();
-        if(!rect) return;
-        console.log(rect);
-        setOffset({x:e.clientX-coord.x,y:e.clientY-coord.y})
-        isClicked.current = true;
-        // console.log(rect,coord)
-      }
+      // console.log(rect,radius,coord);
+      setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
+      isClicked.current = true
+      // console.log(id)
+    }
       const handleMouseUp = ()=>{
         isClicked.current = false;
+        getData(id,{name,id,x:coord.x,y:coord.y});
       }
-      useEffect(()=>{
-        if(isClicked.current){
-            setCoord({x:newCoordOnMove.x-offset.x,y:newCoordOnMove.y-offset.y})
-        }
-      },[newCoordOnMove,offset])
     return(
   <g ref={elementRef}
     id={id}
     onMouseDown={handleMouseDown}
     onMouseUp={handleMouseUp}
-    transform={`translate(${coord.x+9} ${coord.y}) scale(${scale})`}
+    className="transformer"
+    // transform={`translate(${coord.x} ${coord.y}) scale(${scale})`}
+    transform={`scale(${scale})`}
     >
-    <ellipse cx={127.5 + x - 115} cy={127.5 + y - 35} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
-    <ellipse cx={167.5 + x - 115} cy={127.5 + y - 35} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
-    <ellipse cx={150.5 + x - 115} cy={92.5 + y - 35} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
-    <path d={`M ${115 + x - 115} ${117 + y - 35} L ${135 + x - 115} ${127 + y - 35} L ${115 + x - 115} ${137 + y - 35} Z`} fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" transform={`rotate(-90, ${125 + x - 115}, ${127 + y - 35})`} pointerEvents="all"/>
-    <path d={`M ${143 + x - 115} ${83 + y - 35} L ${150 + x - 115} ${90 + y - 35}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${150 + x - 115} ${90 + y - 35} L ${157 + x - 115} ${83 + y - 35}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${150 + x - 115} ${90 + y - 35} L ${150 + x - 115} ${100 + y - 35}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${163 + x - 115} ${123 + y - 35} L ${170 + x - 115} ${130 + y - 35}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${170 + x - 115} ${130 + y - 35} L ${177 + x - 115} ${123 + y - 35}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${170 + x - 115} ${130 + y - 35} L ${170 + x - 115} ${140 + y - 35}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${150 + x - 115} ${65 + y - 35} L ${150 + x - 115} ${35 + y - 35}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${170 + x - 115} ${185 + y - 35} L ${170 + x - 115} ${155 + y - 35}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
-    <path d={`M ${129 + x - 115} ${185 + y - 35} L ${129 + x - 115} ${155 + y - 35}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
+    <ellipse cx={127.5 + coord.x} cy={127.5 + coord.y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
+    <ellipse cx={167.5 + coord.x} cy={127.5 + coord.y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
+    <ellipse cx={150.5 + coord.x} cy={92.5 + coord.y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
+    <path d={`M ${115 + coord.x} ${117 + coord.y} L ${135 + coord.x} ${127 + coord.y} L ${115 + coord.x} ${137 + coord.y} Z`} fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" transform={`rotate(-90, ${125 + coord.x}, ${127 + coord.y})`} pointerEvents="all"/>
+    <path d={`M ${143 + coord.x} ${83 + coord.y} L ${150 + coord.x} ${90 + coord.y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
+    <path d={`M ${150 + coord.x} ${90 + coord.y} L ${157 + coord.x} ${83 + coord.y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
+    <path d={`M ${150 + coord.x} ${90 + coord.y} L ${150 + coord.x} ${100 + coord.y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
+    <path d={`M ${163 + coord.x} ${123 + coord.y} L ${170 + coord.x} ${130 + coord.y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
+    <path d={`M ${170 + coord.x} ${130 + coord.y} L ${177 + coord.x} ${123 + coord.y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
+    <path d={`M ${170 + coord.x} ${130 + coord.y} L ${170 + coord.x} ${140 + coord.y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
+    {/* top cord =   */}
+    <path d={`M ${150 + coord.x} ${65 + coord.y} L ${150 + coord.x} ${35 + coord.y}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
+    {/* bottom right coord = ${55 + coord.x} ${150 + coord.y} */}
+    <path d={`M ${170 + coord.x} ${185 + coord.y} L ${170 + coord.x} ${155 + coord.y}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
+      {/* bototm left coord = ${14 + coord.x } ${150 + coord.y}*/}
+    <path d={`M ${129 + coord.x} ${185 + coord.y} L ${129 + coord.x} ${155 + coord.y}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
   </g>
     )
 }
