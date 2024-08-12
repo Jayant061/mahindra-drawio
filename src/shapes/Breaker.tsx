@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useRef, useState } from 'react'
-import { Shape } from '../utils/Shape'
+import { Shape } from '../models/Shape'
 type BreakerProps = {
 x:number,
 y:number

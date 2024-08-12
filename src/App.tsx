@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Home from "./pages/Home/Home";
 import PlayGround from "./pages/Playground/PlayGround";
+import Home from "./pages/Home/Home";
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<PlayGround />} />
+        <Route path="/" element={<Home />} />
+          <Route path="/playground" element={<PlayGround />} />
       </Routes>
     </BrowserRouter>
   );

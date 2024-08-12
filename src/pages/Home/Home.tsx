@@ -1,9 +1,23 @@
-import React from 'react'
-
+// import React from 'react'
+import MainArea from '../../Components/MainArea/MainArea'
+import Sidebar from '../../Components/HomeSidebar/Sidebar'
+ 
+import './Home.css'
+ 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <div className="homecontainer">
+        <div className="sidebar">
+          <Sidebar />
+        </div>
+        <div className="main-area">
+          <MainArea />
+        </div>
+      </div>
+    </>
   )
 }
-
+ 
 export default Home
+ 

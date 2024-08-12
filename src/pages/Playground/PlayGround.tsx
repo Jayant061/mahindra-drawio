@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, ReactElement, useEffect, useRef, useState } from "react";
 import Transformer from "../../shapes/Transformer.tsx";
 import Relay from "../../shapes/Relay.tsx";
 import Inverter from "../../shapes/Inverter.tsx";
@@ -10,6 +10,7 @@ import Menu from '../../Components/Menu/Menu.tsx';
 import './Playground.css'
 import Annuciator from "../../shapes/Annuciator.tsx";
 import EnergyMeter from "../../shapes/EnergyMeter.tsx";
+import Connector from "../../shapes/Connector.tsx";
 
 interface Shape {
     name: string;
@@ -49,27 +50,6 @@ const PlayGround = () => {
   const handleMouseMove: MouseEventHandler<SVGSVGElement> = (e) => {
     setChildCoord({ x: e.clientX, y: e.clientY });
   };
-  // const [parentCoordinate,setParentCoordinate] = useState({left:0, top:0, right:0, bottom:0})
-  // const [originalSvgGrpWidth,setOriginalSvgGrpWidth] = useState(0)
-  // useEffect(()=>{
-  //   if(!svgRef.current || !svgGrpRef.current)return;
-  // setParentCoordinate({left:svgRef.current?.getBoundingClientRect().left, top:svgRef.current?.getBoundingClientRect().top,right: svgRef.current?.getBoundingClientRect().right,bottom:svgRef.current?.getBoundingClientRect().bottom});
-  //   setOriginalSvgGrpWidth(svgGrpRef.current?.getBoundingClientRect().width)
-  // },[])
-  // useEffect(()=>{
-  //   // console.log(svgRef.current?.getBoundingClientRect(),svgGrpRef.current?.getBoundingClientRect())
-  //   const svgRect = svgRef.current?.getBoundingClientRect();
-  //   const svgGrpRect = svgGrpRef.current?.getBoundingClientRect();
-  //   // if(!svgGrpRect || !svgRect)return;
-
-  //   if(svgGrpRect.left < svgRect.left || svgGrpRect.top < svgRect.top || svgGrpRect.right > svgRect.right || svgGrpRect.bottom > svgRect.bottom){
-  //       setWidth(prev=>2*prev);
-  //   }
-  //   else if(svgGrpRect.left > svgRect.left || svgGrpRect.top > svgRect.top || svgGrpRect.right < svgRect.right || svgGrpRect.bottom <svgRect.bottom){
-  //     setWidth(originalSvgGrpWidth)
-  //     console.log(originalSvgGrpWidth)
-  //   }
-  // },[svgGrpRef.current?.getBoundingClientRect().x,svgGrpRef.current?.getBoundingClientRect().y])
 
   const renderShapes = () => {
     return shapes.map((shape, index) => {
@@ -166,8 +146,8 @@ const PlayGround = () => {
   };
 
   const renderLines = () => {
-    const lines = [];
-    const connector=[];
+    const lines:ReactElement[] = [];
+    const connector:ReactElement[]=[];
     let maxX = shapes[0].x;let maxY =shapes[0].y;let minX = shapes[0].x; let minY=shapes[0].y
     for (let i = 0; i < shapes.length; i++) {
       // const shape1 = shapes[i];
@@ -182,8 +162,9 @@ const PlayGround = () => {
       switch(shapes[i].name){
         case "Inverter":
           connector.push(
+            <g key={`connector${i}`}>
             <line
-            key={`connector${i}`}
+            
             x1={shapes[i].x + 50}
             y1={shapes[i].y}
             x2={maxX+500}
@@ -191,12 +172,15 @@ const PlayGround = () => {
             stroke="black"
             strokeWidth="1"
             />
+            <Connector id={`connector${i}`} x={maxX+500} y={shapes[i].y} zoomLevel={zoomLevel}/>
+            </g>
           )
           break;
           case "Transformer":
             connector.push(
+              <g key={`connector${i}`}>
               <line
-            key={`connector${i}`}
+            
             x1={shapes[i].x + 150}
             y1={shapes[i].y+35}
             x2={maxX+500}
@@ -204,12 +188,15 @@ const PlayGround = () => {
             stroke="black"
             strokeWidth="1"
             />
+            <Connector id={`connector${i}`} x={maxX+500} y={shapes[i].y+35} zoomLevel={zoomLevel}/>
+            </g>
             )
             break;
             case "Relay":
             connector.push(
+              <g key={`connector${i}`}>
               <line
-            key={`connector${i}`}
+            
             x1={shapes[i].x + 11*(shapes[i].radius||0)+10}
             y1={shapes[i].y}
             x2={maxX+500}
@@ -217,12 +204,15 @@ const PlayGround = () => {
             stroke="black"
             strokeWidth="1"
             />
+            <Connector id={`connector${i}`} x={maxX+500} y={shapes[i].y} zoomLevel={zoomLevel}/>
+            </g>
             )
             break;
             case "Annuciator":
             connector.push(
+              <g  key={`connector${i}`}>
               <line
-           key={`connector${i}`}
+          
             x1={shapes[i].x + 50}
             y1={shapes[i].y}
             x2={maxX+500}
@@ -230,6 +220,8 @@ const PlayGround = () => {
             stroke="black"
             strokeWidth="1"
             />
+            <Connector id={`connector${i}`} x={maxX+500} y={shapes[i].y} zoomLevel={zoomLevel}/>
+            </g>
             )
             break;
       }
@@ -245,6 +237,7 @@ const PlayGround = () => {
         stroke="black"
         strokeWidth="1"
         />
+        
       
     )
     const connectors = {
@@ -252,7 +245,21 @@ const PlayGround = () => {
     }
     return connectors;
   };
+  const svgGrpRef = useRef<SVGGElement>(null)
+  const [blockRect,setBlockRect] = useState(<rect/>)
+  useEffect(()=>{
+    const GrpEL = svgGrpRef.current?.ownerSVGElement;
+    const rect = svgGrpRef.current?.getBBox()
 
+    if(!rect || !GrpEL)return;
+    console.log(rect)
+    setBlockRect(<rect x={rect.x} y={rect.y} width={rect.width} height={rect.height} fill="transparent" stroke="blue"
+      style={{cursor:"auto"}}  strokeDasharray="5,5"
+    />)
+  },[childCoord
+  ])
+  // const isBlockDrag = useRef<boolean>(false);
+  // const handleMouseDown: = ()
   return (
     <>
       <div className="playground">
@@ -278,9 +285,13 @@ const PlayGround = () => {
                 height: `${width}%`
               }}
             >
-              <g 
-              // ref={svgGrpRef}
+              <g
+              // onMouseDown={}
+              key={"block1"}
+              style={{border:"2px solid gray"}}
+              ref={svgGrpRef}
               >
+                {blockRect}
               {renderShapes()}
               {renderLines().lines}
               {renderLines().connector}

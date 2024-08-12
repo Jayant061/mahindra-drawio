@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
-import { Shape } from "../utils/Shape";
+import { Shape } from "../models/Shape";
 
 interface RelayProps {
   x: number;
@@ -41,10 +41,45 @@ const handleMouseUp = ()=>{
 
 const arr=[];
 for(let i =0;i<=5;i++){
-  // if(i===0){
-  //   console.log(i,coord.x + 2*i*(radius+1), coord.y, radius, "left:", coord.x + 2*i*(radius+1)-radius, "top:", coord.y-radius)
-  // }
-  arr.push(<circle key={i} cx={coord.x + 2*i*(radius+1)} cy={coord.y} r={radius} style={{margin:"0",padding:"0"}} />)
+  let text = "";
+  switch(i){
+    case 0:
+    text = "50N";
+    break;
+
+    case 1:
+    text = "50";
+    break;
+
+    case 2:
+    text = "51N";
+    break;
+
+    case 3:
+    text = "51";
+    break;
+
+    case 4:
+    text = "67N";
+    break;
+
+    case 5:
+    text = "67";
+    break;
+  }
+  arr.push(
+    <g key={i}>
+  <circle  cx={coord.x + 2*i*(radius+1)} cy={coord.y} r={radius} style={{margin:"0",padding:"0"}} />
+  <text
+   x={coord.x + 2*i*(radius+1)} 
+  y={coord.y}
+  textAnchor="middle"
+  dominantBaseline="middle"
+  stroke='none'
+  fill='black'>
+  {text}  </text>
+  </g>
+)
 }
   return (
     <g ref={elementRef} fill="white" stroke="black" strokeWidth="0.5" x={x} y={y}

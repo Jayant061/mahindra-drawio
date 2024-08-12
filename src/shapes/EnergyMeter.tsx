@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
-import { Shape } from '../utils/Shape';
+import { Shape } from '../models/Shape';
  
 interface EnergyMeterProps {
 //   uniqueId: string;

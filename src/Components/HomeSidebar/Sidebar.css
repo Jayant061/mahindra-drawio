@@ -1,0 +1,13 @@
+.sidebarContainer{
+    .options{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        gap:1rem;
+        .element{
+            background-color: grey;
+            padding: 1rem;
+            color: white;
+        }
+    }
+}
