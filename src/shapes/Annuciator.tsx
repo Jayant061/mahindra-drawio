@@ -9,13 +9,11 @@ interface AnnuciatorProps {
   id: string,
 newCoordOnMove:{x:number,y:number},
 zoomLevel:number
-getData:(id:string,data:Shape)=>void
-  name:string
-
-
+getData:(id:string,data:Shape)=>void,
+  name:string,
 }
  
-const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, newCoordOnMove, zoomLevel,getData,name  }) => {
+const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, newCoordOnMove, zoomLevel,getData,name }) => {
   const elementRef = useRef<SVGGElement>(null);
   const [coord,setCoord] = useState({x:x,y:y})
   const[offset,setOffset] = useState({x:0,y:0});
@@ -35,6 +33,8 @@ const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, newCoordOnMove, zoomLevel,
   
   const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
     // console.log(rect,radius,coord);
+    e.preventDefault();
+    e.stopPropagation()
     setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
     isClicked.current = true
     // console.log(id)

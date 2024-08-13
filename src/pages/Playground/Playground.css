@@ -31,8 +31,11 @@
       z-index: 1;
       flex: 1;
       height:100%;
+      display: flex;
       position: relative;
       width: max-content;
+      overflow: auto;
+
       .menu{
         position: fixed;
         right: 2rem;
@@ -40,15 +43,13 @@
         display: flex;
         flex-direction: row-reverse;
         z-index: 2;
+        background-color: var(--bg-color);        
       }
-      svg{
-        /* width: 200%;
-        height: 100%; */
-        background-color: var(--bg-color);
-        background-image: 
+      background-image: 
         conic-gradient(at calc(100% - 1px) calc(100% - 1px),var(--line-color-1) 270deg, #0000 0),
         conic-gradient(at calc(100% - 1px) calc(100% - 1px),var(--line-color-1) 270deg, #0000 0);
-        background-size: 5px 5px, 1px 1px;
+      svg{
+        overflow: visible;
         g{
           cursor: all-scroll;
         }
