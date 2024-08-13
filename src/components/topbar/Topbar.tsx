@@ -4,8 +4,13 @@ import triangleDown from "../../assets/triangleDown.png";
 import playIcon from "../../assets/play.png";
 import { useState } from "react";
 
-function Topbar() {
+type Props = {
+  captureSVG : boolean,
+}
+
+function Topbar({ captureSVG } : props) {
   const [isCompleteDisabled,setIsCompleteDisabled] = useState(true)
+
   return (
     <>
     <div className="topbarContainer">
@@ -15,7 +20,8 @@ function Topbar() {
         </span>
         <div className="heading"><span>SLD 001</span></div>
         <div className="btns">
-          <button><img src={playIcon} alt="preview" /></button>
+        <button onClick={captureSVG}>Download</button>
+        <button><img src={playIcon} alt="preview" /></button>
           <button onClick={()=>{setIsCompleteDisabled(prev=>!prev)}}>Save Draft</button>
           <button disabled={isCompleteDisabled} style={isCompleteDisabled?{backgroundColor:"rgba(255, 255, 255, 0.8)"}:
           {backgroundColor:"#8BBB04",color:"white"}}
@@ -26,4 +32,4 @@ function Topbar() {
   )
 }
 
-export default Topbar
+export default Topbar;
