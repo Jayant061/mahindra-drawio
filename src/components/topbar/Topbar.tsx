@@ -4,11 +4,11 @@ import triangleDown from "../../assets/triangleDown.png";
 import playIcon from "../../assets/play.png";
 import { useState } from "react";
 
-type Props = {
-  captureSVG : boolean,
+interface TopbarProps {
+  captureSVG:() =>  void
 }
 
-function Topbar({ captureSVG } : props) {
+function Topbar({ captureSVG } : TopbarProps) {
   const [isCompleteDisabled,setIsCompleteDisabled] = useState(true)
 
   return (

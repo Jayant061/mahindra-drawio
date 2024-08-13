@@ -34,6 +34,8 @@ const Inverter: FC<InverterProps> = ({  x, y, id, newCoordOnMove, className,zoom
   },[newCoordOnMove,offset])
   
   const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
+    e.preventDefault();
+    e.stopPropagation()
     // console.log(rect,radius,coord);
     setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
     isClicked.current = true

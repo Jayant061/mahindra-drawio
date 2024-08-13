@@ -13,7 +13,6 @@ interface transformerProps{
 
 export default function Transformer(props:transformerProps){
     const {x,y,id,newCoordOnMove,zoomLevel,getData,name} = props
-    const scale = 1
 
     // const scalingFactor = 0.4;
     const elementRef = useRef<SVGGElement>(null);
@@ -31,6 +30,8 @@ export default function Transformer(props:transformerProps){
     },[newCoordOnMove,offset])
     
     const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
+      e.preventDefault();
+    e.stopPropagation()
       // console.log(rect,radius,coord);
       setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
       isClicked.current = true
@@ -47,7 +48,6 @@ export default function Transformer(props:transformerProps){
     onMouseUp={handleMouseUp}
     className="transformer"
     // transform={`translate(${coord.x} ${coord.y}) scale(${scale})`}
-    transform={`scale(${scale})`}
     >
     <ellipse cx={127.5 + coord.x} cy={127.5 + coord.y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
     <ellipse cx={167.5 + coord.x} cy={127.5 + coord.y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>

@@ -25,20 +25,38 @@ const PlayGround = () => {
   const [shapes, setShapes] = useState<Shape[]>(JSON);
   // const svgGrpRef = useRef<SVGGElement>()
   // const svgRef = useRef<SVGElement>()
-  const [width, setWidth] = useState(100);
   const [childCoord, setChildCoord] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState(1);
+  const svgGrpRef = useRef<SVGGElement>(null)
+  const [blockRect, setBlockRect] = useState(<rect />)
+  const isBlockDrag = useRef<boolean>(false);
+  const [blockCoords, setBlockCoords] = useState({ x: 0, y: 0 })
+  const [transform, setTransform] = useState({ x: 0, y: 0 });
+  const [prevTransform, setPrevTransform] = useState({ x: 0, y: 0 });
+  // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
+
+  useEffect(() => {
+    const GrpEL = svgGrpRef.current?.ownerSVGElement;
+    const rect = svgGrpRef.current?.getBBox()
+    if (!rect || !GrpEL) return;
+    setBlockRect(<rect x={rect.x} y={rect.y} width={rect.width} height={rect.height} fill="transparent" stroke={isBlockDrag.current ? "blue" : "transparent"}
+      style={{ cursor: "auto" }} strokeDasharray="5,5"
+    />)
+    if (isBlockDrag.current) {
+      setTransform({ x: (childCoord.x - blockCoords.x + prevTransform.x * zoomLevel) / zoomLevel, y: (childCoord.y - blockCoords.y + prevTransform.y * zoomLevel) / zoomLevel })
+    }
+  }, [childCoord, isBlockDrag]);
 
 
 
   const handleZoomIn = () => {
     setZoomLevel(prevZoomLevel => prevZoomLevel * 1.2);
-    setWidth(prev => 1.2 * prev);
+    // setWidth(prev => 1.2 * prev);
   };
 
   const handleZoomOut = () => {
     setZoomLevel(prevZoomLevel => prevZoomLevel / 1.2);
-    setWidth(prev => prev / 1.2);
+    // setWidth(prev => prev / 1.2);
   };
 
   const getData = (id: string, data: Shape): void => {
@@ -248,8 +266,7 @@ const PlayGround = () => {
     }
     return connectors;
   };
-  const svgGrpRef = useRef<SVGGElement>(null)
-  const [blockRect, setBlockRect] = useState(<rect />)
+
   useEffect(() => {
     const GrpEL = svgGrpRef.current?.ownerSVGElement;
     const rect = svgGrpRef.current?.getBBox()
@@ -265,17 +282,17 @@ const PlayGround = () => {
   //Downloading Image
   const captureSVG = async () => {
     try {
-      const svgSelector = '#SVG_Canvas'; 
-      const fileName = 'canvas_image';    
+      const svgSelector = 'svg';
+      const fileName = 'canvas_image';
       const fileData = await d3ToPng(svgSelector, fileName, {
-        scale: 3,                   
-        format: 'png',            
-        quality: 1,                 
-        download: false,            
-        ignore: '.ignored',         
-        background: 'white'        
+        scale: 3,
+        format: 'png',
+        quality: 1,
+        download: false,
+        ignore: '.ignored',
+        background: 'white'
       });
-  
+
       const downloadLink = document.createElement('a');
       downloadLink.href = fileData;
       downloadLink.download = `${fileName}.png`;  // Specify the file extension
@@ -284,42 +301,49 @@ const PlayGround = () => {
       console.error('Error capturing SVG:', error);
     }
   };
-  
-  
 
+
+
+  const handleMouseDown: MouseEventHandler = (e) => {
+    isBlockDrag.current = true;
+    setBlockCoords({ x: e.clientX, y: e.clientY });
+  }
+  const handleMouseUp = () => {
+    isBlockDrag.current = false;
+    setPrevTransform(transform);
+  }
   return (
     <>
       <div className="playground">
-        <Topbar captureSVG={captureSVG}/>
+        <Topbar captureSVG={captureSVG} />
         <div className="container">
           <div className="leftbar">
             <Leftbar />
           </div>
-          <div className="svg" style={width !== 100 ? { overflow: "auto" } : {}}>
+          <div className="svg"
+            style={{ backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10}px ${zoomLevel * 10}px`, }}>
             <div className="menu">
               <Menu />
               <button onClick={handleZoomIn}>zIn</button>
               <button onClick={handleZoomOut}>ZOut</button>
             </div>
-            <div
-              id="SVG_Canvas"
-            >
-
+            {/* <div                 className="SVG_Canvas"> */}
               <svg
-                // ref={svgRef}
+
                 onMouseMove={handleMouseMove}
                 style={{
                   transform: `scale(${zoomLevel})`,
                   transformOrigin: `left top`,
-                  backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10}px ${zoomLevel * 10}px`,
-                  width: `${width}%`,
-                  height: `${width}%`
+                  width: `${100 * zoomLevel}%`,
+                  height: `${100 * zoomLevel}%`
                 }}
               >
                 <g
-                  // onMouseDown={}
+                  transform={`translate(${transform.x} ${transform.y})`}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
                   key={"block1"}
-                  style={{ border: "2px solid gray" }}
+                  style={isBlockDrag.current ? { border: "2px solid gray" } : {}}
                   ref={svgGrpRef}
                 >
                   {blockRect}
@@ -332,7 +356,7 @@ const PlayGround = () => {
 
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

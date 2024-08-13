@@ -32,6 +32,8 @@ const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id, radius, newCoordOnMove,z
   },[newCoordOnMove,offset])
   
   const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
+    e.preventDefault();
+    e.stopPropagation()
     // console.log(rect,radius,coord);
     setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
     isClicked.current = true
