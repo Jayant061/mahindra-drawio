@@ -6,18 +6,11 @@ const Heading = () => {
         <>
             <div className="headingcontainer" >
                 <div className="headingIconAndName">
-                    <div className="icon">
-
-                    </div>
                     <div className="headingName">
-                        <h1>
                             Power Plant SLD
-                        </h1>
                     </div>
                 </div>
-                <div className="hLine">
-                    <hr />
-                </div>
+
             </div>
         </>
     )

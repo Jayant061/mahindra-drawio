@@ -1,59 +1,78 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  :root{
-    --bg-color: #fff;
+  margin: 0;
+  padding: 0;
+
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+:root {
+  --bg-color: #fff;
   --line-color-1: rgba(112, 112, 112, 0.2);
   --line-color-2: #a9a9a979;
-  }
-  
-.playground{
+}
+
+.playground {
   display: flex;
   flex-direction: column;
   justify-content: start;
   height: 100vh;
 
-  .container{
+  .container {
     display: flex;
     justify-content: center;
     align-items: start;
     width: 100%;
     flex: 1;
-    .leftbar{
+
+    .leftbar {
       width: 18%;
       min-width: 336px;
       height: 100%;
-      box-shadow: 2px 0 2px  lightgray;
+      box-shadow: 2px 0 2px lightgray;
       z-index: 2;
     }
-    .svg{
+
+
+    .svg {
       z-index: 1;
       flex: 1;
-      height:100%;
+      height: 100%;
       display: flex;
       position: relative;
       width: max-content;
       overflow: auto;
-
-      .menu{
+      background-color: var(--bg-color);
+      background-image:
+        conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),
+        conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0);
+      .menu {
         position: fixed;
         right: 2rem;
         top: 6rem;
         display: flex;
         flex-direction: row-reverse;
         z-index: 2;
-        background-color: var(--bg-color);        
+        background-color: var(--bg-color);
       }
-      background-image: 
-        conic-gradient(at calc(100% - 1px) calc(100% - 1px),var(--line-color-1) 270deg, #0000 0),
-        conic-gradient(at calc(100% - 1px) calc(100% - 1px),var(--line-color-1) 270deg, #0000 0);
-      svg{
-        overflow: visible;
-        g{
-          cursor: all-scroll;
+
+      /* .SVG_Canvas {
+        height: 100%;
+        width: 100%; */
+
+        svg {
+
+          overflow: visible;
+
+          g {
+            cursor: all-scroll;
+          }
         }
-      }
+      /* } */
     }
   }
 }

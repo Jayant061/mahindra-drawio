@@ -1,5 +1,6 @@
 import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { Shape } from '../models/Shape';
+import imgIcon from "../assets/home.png"
  
 interface EnergyMeterProps {
 //   uniqueId: string;
@@ -15,7 +16,7 @@ getData:(id:string,data:Shape)=>void
 
 }
  
-const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id, radius, newCoordOnMove,zoomLevel,getData,name}) => {
+const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id, newCoordOnMove,zoomLevel,getData,name}) => {
   const elementRef = useRef<SVGGElement>(null);
   const [coord,setCoord] = useState({x:x,y:y})
   const[offset,setOffset] = useState({x:0,y:0});
@@ -57,8 +58,9 @@ const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id, radius, newCoordOnMove,z
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
     >
-      <circle cx={coord.x} cy={coord.y} radius={radius} id={`EM${id}`}/>
+      {/* <circle cx={coord.x} cy={coord.y} radius={radius} id={`EM${id}`}/> */}
       {/* <text x="50%" y="50%" text-anchor="middle" fill="green" font-size="16px" font-family="Arial" dy=".3em">14W</text> */}
+      <image href={imgIcon} height="200" width="200" />
     </g>
   );
 };

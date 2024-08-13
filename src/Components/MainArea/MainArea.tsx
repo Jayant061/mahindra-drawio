@@ -1,5 +1,6 @@
 import React from 'react'
 import Heading from '../Heading/Heading'
+import Configuration from '../Configuration-Div/Configuration'
 
 const MainArea = () => {
     return (
@@ -7,6 +8,9 @@ const MainArea = () => {
             <div className="mainAreaContainer">
                 <div className="heading">
                     <Heading />
+                </div>
+                <div className="Configuration">
+                    <Configuration />
                 </div>
             </div>
         </>
