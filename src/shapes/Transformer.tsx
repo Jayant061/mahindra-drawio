@@ -11,8 +11,8 @@ interface transformerProps{
     name:string
 }
 
-export default function Transformer(props:transformerProps){
-    const {x,y,id,newCoordOnMove,zoomLevel,getData,name} = props
+export default function Transformer({x,y,id,newCoordOnMove,zoomLevel,getData,name}:transformerProps){
+    // const {x,y,id,newCoordOnMove,zoomLevel,getData,name} = props
 
     // const scalingFactor = 0.4;
     const elementRef = useRef<SVGGElement>(null);
