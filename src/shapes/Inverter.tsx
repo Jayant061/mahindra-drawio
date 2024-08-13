@@ -66,17 +66,17 @@ const Inverter: FC<InverterProps> = ({  x, y, id}) => {
       <rect width={width} height={height} x={0} y={0} id={`InverterReactangle1`} />
       <rect width={0.1*width} height={0.1*height} x={width/2} y={-0.05*height} id={`InverterReactangle2`} fill='green' />
       <text
-        id={`InvertedText1`}
+        id={`InverterText1`}
         x={0.5 * width}
         y={0.55 * height}
         width={width - 2}
         fontFamily='sans-serif'
         stroke='none'
-        fill='black'
-        fontSize={2.5}
+        fill='green'
+        fontSize={10}
         textAnchor="middle"
         dominantBaseline="middle"
-      >
+      >LT Pannel {id}
       </text>
     </g>
   );

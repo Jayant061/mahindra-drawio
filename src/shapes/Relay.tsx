@@ -1,46 +1,17 @@
-import { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
-import { Shape } from "../models/Shape";
+import { FC, useRef } from "react";
+
 
 interface RelayProps {
   x: number;
   y: number;
   id: string;
-  // newCoordOnMove:{x:number,y:number}
+
   radius:number
-  // getData:(id:string,data:Shape)=>void
-  // name:string
-  // zoomLevel:number,
-  // className:string
+
 }
 
 const Relay: FC<RelayProps> = ({ x, y, radius}) => {
   const elementRef = useRef<SVGGElement>(null);
-  // const isClicked = useRef<boolean>(false);
-  // const [coord,setCoord]= useState({x,y});
-  // const [offset,setOffset] = useState({x:0,y:0})
-  
-// useEffect(()=>{
-//   if(isClicked.current){
-//     setCoord(
-//       {x:(newCoordOnMove.x-offset.x)/zoomLevel,
-//         y:(newCoordOnMove.y-offset.y)/zoomLevel
-//       });
-// }
-// },[newCoordOnMove,offset,radius])
-
-// const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-//   e.preventDefault();
-//     e.stopPropagation()
-//   // console.log(rect,radius,coord);
-//   setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
-//   isClicked.current = true
-//   // console.log(id)
-// }
-// const handleMouseUp = ()=>{
-//   isClicked.current = false;
-//   getData(id,{name,id,x:coord.x,y:coord.y,radius});
-// }
-
 const arr=[];
 for(let i =0;i<=5;i++){
   let text = "";

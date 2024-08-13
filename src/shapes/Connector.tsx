@@ -3,14 +3,14 @@ interface connectorProps{
     x:number,
     y:number,
     id:string,
-    zoomLevel:number
 
 }
-const Connector:FC<connectorProps> = ({x,y})=> {
+const Connector:FC<connectorProps> = ({x,y,id})=> {
     const yOffset = 20;
     const lineLength = 20
   return (
     <g
+    id={`connector${id}`}
     onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     strokeWidth={2}
     >

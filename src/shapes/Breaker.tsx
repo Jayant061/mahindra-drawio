@@ -1,13 +1,8 @@
-import { MouseEventHandler, useEffect, useRef, useState } from 'react'
-import { Shape } from '../models/Shape'
+import { useRef} from 'react'
 type BreakerProps = {
 x:number,
 y:number
-// newCoordOnMove:{x:number,y:number}
 id:string
-// zoomLevel:number
-// getData:(id:string,data:Shape)=>void
-//   name:string
 
 }
 function Breaker(props:BreakerProps) {
@@ -15,45 +10,16 @@ function Breaker(props:BreakerProps) {
   const arrowOffset = 20
   const stroke = "green"
     const {id,x,y} = props
-    // const scale=0.4
-    const elementRef = useRef<SVGGElement>(null);
-    // const[offset,setOffset] = useState({x:0,y:0});
-    // const[coord,setCoord] = useState({x:x,y:y});
-    // const isClicked = useRef<boolean>(false);
 
-    // useEffect(()=>{
-    //   if(isClicked.current){
-    //     setCoord(
-    //       {x:(newCoordOnMove.x-offset.x)/zoomLevel,
-    //         y:(newCoordOnMove.y-offset.y)/zoomLevel
-    //       });
-    // }
-    // },[newCoordOnMove,offset])
-    
-    // const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-    //   e.preventDefault();
-    // e.stopPropagation()
-    //   // console.log(rect,radius,coord);
-    //   setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
-    //   isClicked.current = true
-    //   // console.log(id)
-    // }
-    //   const handleMouseUp = ()=>{
-    //     isClicked.current = false;
-    //     getData(id,{id,name,x:coord.x,y:coord.y});
-    //   }
+    const elementRef = useRef<SVGGElement>(null);
 
   return (
   <g 
-  // transform={`translate(${coord.x} ${coord.y}) scale(${scale})`} 
-  // transform={`scale(${scale})`}
-  ref={elementRef}
-  // onMouseDown={handleMouseDown}
-  // onMouseUp={handleMouseUp}
   onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     strokeWidth={3}
     fill={stroke}
  id={id}
+ ref={elementRef}
 >
    <line x1={x} y1={y} x2={x} y2={y+height} stroke={stroke} />
 

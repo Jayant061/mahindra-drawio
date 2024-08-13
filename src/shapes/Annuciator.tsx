@@ -1,51 +1,16 @@
 import { FC, useRef, } from 'react';
  
 interface AnnuciatorProps {
-//   uniqueId: string;
-//   value: string;
   x: number;
   y: number;
   id: string,
-// newCoordOnMove:{x:number,y:number},
-// zoomLevel:number
-// getData:(id:string,data:Shape)=>void,
-//   name:string,
 }
  
 const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, }) => {
   const elementRef = useRef<SVGGElement>(null);
-  // const [coord,setCoord] = useState({x:x,y:y})
-  // const[offset,setOffset] = useState({x:0,y:0});
-  // const [transform,setTransform] = useState(`translate(${coord.x} ${coord.y})`);
-  // const isClicked = useRef<boolean>(false);
   const width = 100;
   const height = width / 2;
-  
-  // useEffect(()=>{
-  //   if(isClicked.current){
-  //     setCoord(
-  //       {x:(newCoordOnMove.x-offset.x)/zoomLevel,
-  //         y:(newCoordOnMove.y-offset.y)/zoomLevel
-  //       });
-  // }
-  // },[newCoordOnMove,offset])
-  
-  // const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-  //   // console.log(rect,radius,coord);
-  //   e.preventDefault();
-  //   e.stopPropagation()
-  //   setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
-  //   isClicked.current = true
-  //   // console.log(id)
-  // }
-  
-  // const handleMouseUp = ()=>{
-  //     isClicked.current = false;
-  //     // console.log(coord.x, coord.y)
-  //     getData(id,{id,name,x:coord.x,y:coord.y})
-  // }
- 
- 
+
   return (
     <g
       ref={elementRef}
@@ -54,8 +19,6 @@ const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, }) => {
       strokeWidth="0.5"
       id={`Annuciator${id}`}
       transform={`translate(${x} ${y})`}
-      // onMouseDown={handleMouseDown}
-      // onMouseUp={handleMouseUp}
       onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     >
       <rect width={width} height={height} x={0} y={0} id={`InverterReactangle1`} />
