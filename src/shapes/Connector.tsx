@@ -11,6 +11,7 @@ const Connector:FC<connectorProps> = ({x,y})=> {
     const lineLength = 20
   return (
     <g
+    onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     strokeWidth={2}
     >
         {/* top */}

@@ -5,41 +5,41 @@ interface RelayProps {
   x: number;
   y: number;
   id: string;
-  newCoordOnMove:{x:number,y:number}
+  // newCoordOnMove:{x:number,y:number}
   radius:number
-  getData:(id:string,data:Shape)=>void
-  name:string
-  zoomLevel:number,
-  className:string
+  // getData:(id:string,data:Shape)=>void
+  // name:string
+  // zoomLevel:number,
+  // className:string
 }
 
-const Relay: FC<RelayProps> = ({name, x, y, id, radius, newCoordOnMove,getData,zoomLevel,className}) => {
+const Relay: FC<RelayProps> = ({ x, y, radius}) => {
   const elementRef = useRef<SVGGElement>(null);
-  const isClicked = useRef<boolean>(false);
-  const [coord,setCoord]= useState({x,y});
-  const [offset,setOffset] = useState({x:0,y:0})
+  // const isClicked = useRef<boolean>(false);
+  // const [coord,setCoord]= useState({x,y});
+  // const [offset,setOffset] = useState({x:0,y:0})
   
-useEffect(()=>{
-  if(isClicked.current){
-    setCoord(
-      {x:(newCoordOnMove.x-offset.x)/zoomLevel,
-        y:(newCoordOnMove.y-offset.y)/zoomLevel
-      });
-}
-},[newCoordOnMove,offset,radius])
+// useEffect(()=>{
+//   if(isClicked.current){
+//     setCoord(
+//       {x:(newCoordOnMove.x-offset.x)/zoomLevel,
+//         y:(newCoordOnMove.y-offset.y)/zoomLevel
+//       });
+// }
+// },[newCoordOnMove,offset,radius])
 
-const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-  e.preventDefault();
-    e.stopPropagation()
-  // console.log(rect,radius,coord);
-  setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
-  isClicked.current = true
-  // console.log(id)
-}
-const handleMouseUp = ()=>{
-  isClicked.current = false;
-  getData(id,{name,id,x:coord.x,y:coord.y,radius});
-}
+// const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
+//   e.preventDefault();
+//     e.stopPropagation()
+//   // console.log(rect,radius,coord);
+//   setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
+//   isClicked.current = true
+//   // console.log(id)
+// }
+// const handleMouseUp = ()=>{
+//   isClicked.current = false;
+//   getData(id,{name,id,x:coord.x,y:coord.y,radius});
+// }
 
 const arr=[];
 for(let i =0;i<=5;i++){
@@ -70,11 +70,11 @@ for(let i =0;i<=5;i++){
     break;
   }
   arr.push(
-    <g key={i}>
-  <circle  cx={coord.x + 2*i*(radius+1)} cy={coord.y} r={radius} style={{margin:"0",padding:"0"}} />
+    <g key={i} onClick={()=>{console.log(i)}}>
+  <circle  cx={x + 2*i*(radius+1)} cy={y} r={radius} style={{margin:"0",padding:"0"}}/>
   <text
-   x={coord.x + 2*i*(radius+1)} 
-  y={coord.y}
+   x={x + 2*i*(radius+1)} 
+  y={y}
   textAnchor="middle"
   dominantBaseline="middle"
   stroke='none'
@@ -85,9 +85,10 @@ for(let i =0;i<=5;i++){
 }
   return (
     <g ref={elementRef} fill="white" stroke="black" strokeWidth="0.5" x={x} y={y}
-    className={className}
-    onMouseDown={handleMouseDown}
-    onMouseUp={handleMouseUp}>
+    className={"relay"}
+    onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
+    // onMouseUp={handleMouseUp}
+    >
       {arr}
     </g>
 

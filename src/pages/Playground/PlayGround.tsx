@@ -23,8 +23,6 @@ interface Shape {
 
 const PlayGround = () => {
   const [shapes, setShapes] = useState<Shape[]>(JSON);
-  // const svgGrpRef = useRef<SVGGElement>()
-  // const svgRef = useRef<SVGElement>()
   const [childCoord, setChildCoord] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState(1);
   const svgGrpRef = useRef<SVGGElement>(null)
@@ -59,19 +57,19 @@ const PlayGround = () => {
     // setWidth(prev => prev / 1.2);
   };
 
-  const getData = (id: string, data: Shape): void => {
-    setShapes((prev) => {
-      return prev.map((item) => {
-        if (item.id === id) return data;
-        return item;
-      });
-    });
-  };
+  // const getData = (id: string, data: Shape): void => {
+  //   setShapes((prev) => {
+  //     return prev.map((item) => {
+  //       if (item.id === id) return data;
+  //       return item;
+  //     });
+  //   });
+  // };
 
   const handleMouseMove: MouseEventHandler<SVGSVGElement> = (e) => {
     setChildCoord({ x: e.clientX, y: e.clientY });
   };
-
+  // const startTime = new Date().getTime()
   const renderShapes = () => {
     return shapes.map((shape, index) => {
       switch (shape.name) {
@@ -79,28 +77,28 @@ const PlayGround = () => {
           return (
             <Relay
               key={index}
-              name={shape.name}
               id={shape.id}
               x={shape.x}
               y={shape.y}
               radius={shape.radius || 30}
-              newCoordOnMove={childCoord}
-              getData={getData}
-              zoomLevel={zoomLevel}
-              className="Relay"
+              // name={shape.name}
+              // newCoordOnMove={childCoord}
+              // getData={getData}
+              // zoomLevel={zoomLevel}
+              // className="Relay"
             />
           );
         case 'Transformer':
           return (
             <Transformer
               key={index}
-              name={shape.name}
               id={shape.id}
               x={shape.x}
               y={shape.y}
-              newCoordOnMove={childCoord}
-              zoomLevel={zoomLevel}
-              getData={getData}
+              // name={shape.name}
+              // newCoordOnMove={childCoord}
+              // zoomLevel={zoomLevel}
+              // getData={getData}
             />
           );
         case 'Inverter':
@@ -110,11 +108,11 @@ const PlayGround = () => {
               id={shape.id}
               x={shape.x}
               y={shape.y}
-              name={shape.name}
-              newCoordOnMove={childCoord}
-              className='Inverter'
-              zoomLevel={zoomLevel}
-              getData={getData}
+              // name={shape.name}
+              // newCoordOnMove={childCoord}
+              // className='Inverter'
+              // zoomLevel={zoomLevel}
+              // getData={getData}
             />
           );
         case "Breaker":
@@ -124,10 +122,10 @@ const PlayGround = () => {
               id={shape.id}
               x={shape.x}
               y={shape.y}
-              name={shape.name}
-              newCoordOnMove={childCoord}
-              zoomLevel={zoomLevel}
-              getData={getData}
+              // name={shape.name}
+              // newCoordOnMove={childCoord}
+              // zoomLevel={zoomLevel}
+              // getData={getData}
 
             />
           );
@@ -138,10 +136,10 @@ const PlayGround = () => {
               id={shape.id}
               x={shape.x}
               y={shape.y}
-              newCoordOnMove={childCoord}
-              zoomLevel={zoomLevel}
-              getData={getData}
-              name={shape.name}
+              // newCoordOnMove={childCoord}
+              // zoomLevel={zoomLevel}
+              // getData={getData}
+              // name={shape.name}
 
             />
           );
@@ -153,16 +151,16 @@ const PlayGround = () => {
               x={shape.x}
               y={shape.y}
               radius={shape.radius || 30}
-              newCoordOnMove={childCoord}
-              zoomLevel={zoomLevel}
-              getData={getData}
-              name={shape.name}
+              // newCoordOnMove={childCoord}
+              // zoomLevel={zoomLevel}
+              // getData={getData}
+              // name={shape.name}
 
             />
           );
         default:
           return null;
-      }
+        }
     });
   };
 
@@ -276,8 +274,7 @@ const PlayGround = () => {
     setBlockRect(<rect x={rect.x} y={rect.y} width={rect.width} height={rect.height} fill="transparent" stroke="blue"
       style={{ cursor: "auto" }} strokeDasharray="5,5"
     />)
-  }, [childCoord
-  ])
+  }, [childCoord])
 
   //Downloading Image
   const captureSVG = async () => {
@@ -329,7 +326,7 @@ const PlayGround = () => {
             </div>
             {/* <div                 className="SVG_Canvas"> */}
               <svg
-
+              // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
                 onMouseMove={handleMouseMove}
                 style={{
                   transform: `scale(${zoomLevel})`,
@@ -347,6 +344,7 @@ const PlayGround = () => {
                   ref={svgGrpRef}
                 >
                   {blockRect}
+                  
                   {renderShapes()}
                   {renderLines().lines}
                   {renderLines().connector}
