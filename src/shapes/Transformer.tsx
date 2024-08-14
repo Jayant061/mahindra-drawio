@@ -18,6 +18,7 @@ export default function Transformer({x,y,id,}:transformerProps){
     onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     className="transformer"
     >
+      {/* leftmost point = 100+x 127.5 rightmost point = 195+x */}
     <ellipse cx={127.5 + x} cy={127.5 + y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
     <ellipse cx={167.5 + x} cy={127.5 + y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
     <ellipse cx={150.5 + x} cy={92.5 + y} rx={27.5} ry={27.5} fillOpacity="0.25" fill="rgb(255, 255, 255)" stroke="black" pointerEvents="all"/>
@@ -28,7 +29,7 @@ export default function Transformer({x,y,id,}:transformerProps){
     <path d={`M ${163 + x} ${123 + y} L ${170 + x} ${130 + y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
     <path d={`M ${170 + x} ${130 + y} L ${177 + x} ${123 + y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
     <path d={`M ${170 + x} ${130 + y} L ${170 + x} ${140 + y}`} fill="none" stroke="green" strokeMiterlimit="10" pointerEvents="stroke"/>
-    {/* top cord =   */}
+    {/* top cord = 150+x, 35+y  */}
     <path d={`M ${150 + x} ${65 + y} L ${150 + x} ${35 + y}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>
     {/* bottom right = ${55 + x} ${150 + y} */}
     <path d={`M ${170 + x} ${185 + y} L ${170 + x} ${155 + y}`} fill="none" stroke="rgb(0, 0, 0)" strokeMiterlimit="10" pointerEvents="stroke"/>

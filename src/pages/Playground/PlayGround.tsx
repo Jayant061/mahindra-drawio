@@ -6,6 +6,7 @@ import Menu from '../../Components/Menu/Menu.tsx';
 import './Playground.css'
 import d3ToPng from 'd3-svg-to-png';
 import Block from "../../Components/Block/Block.tsx";
+import ParallelLine from "../../Components/Lines/ParallelLine.tsx";
 
 interface Shape {
   name: string;
@@ -14,30 +15,22 @@ interface Shape {
   radius?: number;
   id: string;
 }
+interface block{
+  id:string,
+  name:string,
+  x:number,
+  y:number,
+  elements:string[]
+}
 
 const PlayGround = () => {
-  const [shapes, setShapes] = useState<Shape[]>(JSON);
+  const [shapes, setShapes] = useState<block[]>(JSON);
   const [childCoord, setChildCoord] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState(1);
-  const svgGrpRef = useRef<SVGGElement>(null)
-  const [blockRect, setBlockRect] = useState(<rect />)
-  const isBlockDrag = useRef<boolean>(false);
-  const [blockCoords, setBlockCoords] = useState({ x: 0, y: 0 })
-  const [transform, setTransform] = useState({ x: 0, y: 0 });
-  const [prevTransform, setPrevTransform] = useState({ x: 0, y: 0 });
+  const svgRef = useRef<SVGSVGElement>(null)
+  const [viewBox,setViewBox] = useState({width:0,height:0})
   // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
 
-  useEffect(() => {
-    const GrpEL = svgGrpRef.current?.ownerSVGElement;
-    const rect = svgGrpRef.current?.getBBox()
-    if (!rect || !GrpEL) return;
-    setBlockRect(<rect x={rect.x} y={rect.y} width={rect.width} height={rect.height} fill="transparent" stroke={isBlockDrag.current ? "blue" : "transparent"}
-      style={{ cursor: "auto" }} strokeDasharray="5,5"
-    />)
-    if (isBlockDrag.current) {
-      setTransform({ x: (childCoord.x - blockCoords.x + prevTransform.x * zoomLevel) / zoomLevel, y: (childCoord.y - blockCoords.y + prevTransform.y * zoomLevel) / zoomLevel })
-    }
-  }, [childCoord, isBlockDrag]);
 
 
 
@@ -55,14 +48,9 @@ const PlayGround = () => {
   };
 
   useEffect(() => {
-    const GrpEL = svgGrpRef.current?.ownerSVGElement;
-    const rect = svgGrpRef.current?.getBBox()
-
-    if (!rect || !GrpEL) return;
-    // console.log(rect)
-    setBlockRect(<rect x={rect.x} y={rect.y} width={rect.width} height={rect.height} fill="transparent" stroke="blue"
-      style={{ cursor: "auto" }} strokeDasharray="5,5"
-    />)
+    const svgRect = svgRef.current?.getBBox();
+    if(!svgRect) return;
+      setViewBox({width:svgRect.right-svgRect.left,height:svgRect.bottom-svgRect.top})
   }, [childCoord])
 
   //Downloading Image
@@ -90,14 +78,10 @@ const PlayGround = () => {
 
 
 
-  const handleMouseDown: MouseEventHandler = (e) => {
-    isBlockDrag.current = true;
-    setBlockCoords({ x: e.clientX, y: e.clientY });
-  }
-  const handleMouseUp = () => {
-    isBlockDrag.current = false;
-    setPrevTransform(transform);
-  }
+  
+  const blocks = shapes.map((shape,index)=>{return(<Block key={index} childCoord={childCoord} shapes={shape} zoomLevel={zoomLevel}/>)});
+                  
+                
   return (
     <>
       <div className="playground">
@@ -117,30 +101,23 @@ const PlayGround = () => {
             {/* <div                 className="SVG_Canvas"> */}
               <svg
               // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
+              ref={svgRef}
+              viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
                 onMouseMove={handleMouseMove}
                 style={{
                   transform: `scale(${zoomLevel})`,
                   transformOrigin: `left top`,
                   width: `${100 * zoomLevel}%`,
                   height: `${100 * zoomLevel}%`,
-                  minWidth:"200%",
-                  minHeight:"200%",
+                  minWidth:`${viewBox.width}`,
+                  minHeight:`${viewBox.height}`,
+
                   backgroundImage:"conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)",
                   backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10}px ${zoomLevel * 10}px`
                 }}
               >
-                <g
-                  transform={`translate(${transform.x} ${transform.y})`}
-                  onMouseDown={handleMouseDown}
-                  onMouseUp={handleMouseUp}
-                  key={"block1"}
-                  style={isBlockDrag.current ? { border: "2px solid gray" } : {}}
-                  ref={svgGrpRef}
-                >
-                  {blockRect}
-                  
-                  <Block shapes={shapes}/>
-                </g>
+                {blocks}
+                <ParallelLine x1={560} y1={60} x2={1060} y2={60}/>
               </svg>
             </div>
 

@@ -18,14 +18,14 @@ const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, }) => {
       stroke="green"
       strokeWidth="0.5"
       id={`Annuciator${id}`}
-      transform={`translate(${x} ${y})`}
+      // transform={`translate(${x} ${y})`}
       onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     >
-      <rect width={width} height={height} x={0} y={0} id={`InverterReactangle1`} />
+      <rect width={width} height={height} x={x} y={y} id={`InverterReactangle1`} />
       <text
         id={`InvertedText1`}
-        x={0.5 * width}
-        y={0.55 * height}
+        x={x+0.5 * width}
+        y={y+0.55 * height}
         width={width - 2}
         fontFamily='sans-serif'
         stroke='none'

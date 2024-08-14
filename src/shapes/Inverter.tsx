@@ -1,5 +1,5 @@
-import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
-import { Shape } from '../models/Shape';
+import { FC, useRef, } from 'react';
+// import { Shape } from '../models/Shape';
  
 interface InverterProps {
 //   uniqueId: string;
@@ -15,7 +15,7 @@ interface InverterProps {
 
 }
  
-const Inverter: FC<InverterProps> = ({  x, y, id}) => {
+const Inverter: FC<InverterProps> = ({  x,y, id}) => {
   const elementRef = useRef<SVGGElement>(null);
   // const [coord,setCoord] = useState({x:x,y:y})
   // const[offset,setOffset] = useState({x:0,y:0});
@@ -56,19 +56,15 @@ const Inverter: FC<InverterProps> = ({  x, y, id}) => {
       stroke="green"
       strokeWidth="0.5"
       id={`Inverter${id}`}
-      transform={`translate(${x} ${y})`}
-      // onMouseDown={handleMouseDown}
-      // onMouseUp={handleMouseUp}
-      // className={className}
       onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
       onClick={()=>{console.log(id)}}
     >
-      <rect width={width} height={height} x={0} y={0} id={`InverterReactangle1`} />
-      <rect width={0.1*width} height={0.1*height} x={width/2} y={-0.05*height} id={`InverterReactangle2`} fill='green' />
+      <rect width={width} height={height} x={x} y={y} id={`InverterReactangle1`} />
+      <rect width={0.1*width} height={0.1*height} x={x+width/2} y={y-0.05*height} id={`InverterReactangle2`} fill='green' />
       <text
         id={`InverterText1`}
-        x={0.5 * width}
-        y={0.55 * height}
+        x={x+0.5 * width}
+        y={y+0.55 * height}
         width={width - 2}
         fontFamily='sans-serif'
         stroke='none'
