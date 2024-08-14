@@ -25,6 +25,8 @@ const PlayGround = () => {
   const [blockCoords, setBlockCoords] = useState({ x: 0, y: 0 })
   const [transform, setTransform] = useState({ x: 0, y: 0 });
   const [prevTransform, setPrevTransform] = useState({ x: 0, y: 0 });
+  const [viewBoxCoordinates, setviewBoxCoordinates] = useState({ x: 1000, y: 1000 });
+
   // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
 
   useEffect(() => {
@@ -94,10 +96,17 @@ const PlayGround = () => {
     isBlockDrag.current = true;
     setBlockCoords({ x: e.clientX, y: e.clientY });
   }
+
   const handleMouseUp = () => {
     isBlockDrag.current = false;
     setPrevTransform(transform);
   }
+  
+  const handleMouseLeave: MouseEventHandler = (e) => {
+       isBlockDrag.current = false;
+  }
+
+
   return (
     <>
       <div className="playground">
@@ -116,8 +125,9 @@ const PlayGround = () => {
             </div>
             {/* <div                 className="SVG_Canvas"> */}
               <svg
-              // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
+                viewBox={`0 0 ${viewBoxCoordinates.x} ${viewBoxCoordinates.y}`}
                 onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 style={{
                   transform: `scale(${zoomLevel})`,
                   transformOrigin: `left top`,
