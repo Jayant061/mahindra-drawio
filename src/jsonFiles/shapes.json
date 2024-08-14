@@ -1,8 +1,17 @@
 [
-  { "id": "002", "name": "Relay", "x": 200, "y": 100, "radius": 20 },
-  {"id":"003","name":"Transformer", "x":200,"y":200,"radius":30},
-  {"id":"004","name":"Inverter", "x":200,"y":300,"radius":30},
-  {"id":"005","name":"Annuciator", "x":200,"y":400,"radius":30},
-  {"id":"006","name":"EnergyMeter", "x":200,"y":500,"radius":30},
-  {"id":"007","name":"Breaker", "x":200,"y":600,"radius":30}
+    {
+      "id": "b1",
+      "name": "Block1",
+      "x": 60,
+      "y": 60,
+      "elements": ["Relay", "EnergyMeter", "Transformer"]
+    },
+
+    {
+      "id": "b3",
+      "name": "Block1",
+      "x": 1060,
+      "y": 60,
+      "elements": ["Relay", "EnergyMeter", "Transformer"]
+    }
 ]

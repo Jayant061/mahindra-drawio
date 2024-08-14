@@ -28,6 +28,7 @@ body {
     align-items: start;
     width: 100%;
     flex: 1;
+    overflow: hidden;
 
     .leftbar {
       width: 18%;
@@ -59,9 +60,7 @@ body {
         background-color: var(--bg-color);
       }
         svg {
-          width:auto;
-          height: auto;
-          /* overflow: visible; */
+          overflow: visible;
           g {
             cursor:auto
           }

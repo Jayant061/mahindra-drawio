@@ -6,8 +6,9 @@ id:string
 
 }
 function Breaker(props:BreakerProps) {
-  const height=140;
-  const arrowOffset = 20
+  const height=70;
+  const arrowOffset = 10;
+  const radius = 3;
   const stroke = "green"
     const {id,x,y} = props
 
@@ -42,9 +43,9 @@ function Breaker(props:BreakerProps) {
    {/* bottom left arrow */}
    <line x1={x} y1={y+height} x2={x-arrowOffset} y2={y+height-arrowOffset} stroke={stroke} />
    {/* top circle */}
-   <circle cx={x} cy={y+2*arrowOffset} r={5}/>
+   <circle cx={x} cy={y+2*arrowOffset} r={radius}/>
    {/* bottom circle */}
-   <circle cx={x} cy={y+height-2*arrowOffset} r={5}/>
+   <circle cx={x} cy={y+height-2*arrowOffset} r={radius}/>
 </g>
 
   )

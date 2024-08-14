@@ -7,7 +7,7 @@ interface EnergyMeterProps {
 radius:number,
 }
  
-const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id}) => {
+const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id,radius}) => {
   const elementRef = useRef<SVGGElement>(null);
   return (
     <g
@@ -16,13 +16,13 @@ const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id}) => {
       stroke="green"
       strokeWidth="0.5"
       id={`EM${id}`}
-      transform={`translate(${x} ${y})`}
+      // transform={`translate(${0} ${y})`}
       onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     >
-      <circle cx={x} cy={y} r={30}/>
+      <circle cx={x+210} cy={y} r={radius}/>
       <text
         id={`EMText1`}
-        x={x}
+        x={x+210}
         y={y}
         fontFamily='sans-serif'
         stroke='none'
