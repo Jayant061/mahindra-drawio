@@ -15,11 +15,11 @@ interface blockProps {
     y: number;
     elements: string[];
   };
-  key: number;
+  id: number;
   childCoord: { x: number; y: number };
   zoomLevel: number;
 }
-function Block({ shapes, key, childCoord, zoomLevel }: blockProps) {
+function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
   const radius = 20;
   const gap = 60
   const [blockRect, setBlockRect] = useState(<rect />);
@@ -143,7 +143,7 @@ function Block({ shapes, key, childCoord, zoomLevel }: blockProps) {
       transform={`translate(${transform.x} ${transform.y})`}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      key={key}
+      key={id}
       style={isBlockDrag.current ? { border: "2px solid gray" } : {}}
       ref={svgGrpRef}
       fill="green"

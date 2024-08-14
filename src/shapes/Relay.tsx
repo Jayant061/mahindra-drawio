@@ -55,7 +55,7 @@ for(let i =0;i<=5;i++){
 )
 }
   return (
-    <g ref={elementRef} fill="white" stroke="black" strokeWidth="0.5" x={x} y={y}
+    <g ref={elementRef} fill="white" stroke="black" strokeWidth="1" x={x} y={y}
     className={"relay"}
     onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     // onMouseUp={handleMouseUp}

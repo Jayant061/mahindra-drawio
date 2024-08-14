@@ -1,16 +1,17 @@
 [
-  {
-    "id": "b1",
-    "name": "Block1",
-    "x": 60,
-    "y": 60,
-    "elements": ["Relay", "EnergyMeter","Transformer"]
-  },
-  {
-    "id": "b2",
-    "name": "Block1",
-    "x": 560,
-    "y": 60,
-    "elements": ["Relay", "Inverter", "EnergyMeter","Transformer"]
-  }
+    {
+      "id": "b1",
+      "name": "Block1",
+      "x": 60,
+      "y": 60,
+      "elements": ["Relay", "EnergyMeter", "Transformer"]
+    },
+
+    {
+      "id": "b3",
+      "name": "Block1",
+      "x": 1060,
+      "y": 60,
+      "elements": ["Relay", "EnergyMeter", "Transformer"]
+    }
 ]
