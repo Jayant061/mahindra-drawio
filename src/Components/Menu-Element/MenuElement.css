@@ -1,0 +1,43 @@
+.component-element{
+    display: flex;
+    padding: auto;
+    position: relative;
+    gap: 0.5rem;
+    .image{
+      display: flex;
+        img{
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .dropDownButton{
+      display: flex;
+      align-items: center;
+    }
+    .name{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+  }
+
+  .images{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    right: 105%;
+    top:40%;
+    position: absolute;
+    width: 65%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    img{
+      object-fit: cover;
+      height: 50%;
+      width: 50%;
+      padding: auto;
+  }
+  }

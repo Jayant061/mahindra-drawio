@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import MenuElement from '../Menu-Element/MenuElement';
+
 import './Menu.css';
 
 const Menu = () => {
@@ -11,6 +13,17 @@ const Menu = () => {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
+  const obj = [{
+    "id": "k1",
+    "name": "Transformer",
+    "imgPath": "transformer.svg"
+  },
+  {
+    "id": "k2",
+    "name": "Inverter",
+    "imgPath": "inverter.svg"
+  }];
 
   return (
     <>
@@ -25,19 +38,10 @@ const Menu = () => {
           </div>
           <hr />
           <ul>
-            <div className="component-element">
-            <div className="image">
-                <img src="transformer.svg" alt="zxc" />
-              </div>
-              <div className="name">Transformer</div>
-            </div>
-            <div className="component-element">
-              <div className="image">
-                <img src="inverter.svg" alt="zxc" />
-              </div>
-              <div className="name">Inverter</div>
-            </div>
-          </ul>
+            {obj.map((element) => (
+              <MenuElement id={element.id} imgPath={element.imgPath} name={element.name} />
+            ))}
+        </ul>
         </div>
       )}
     </>
