@@ -31,7 +31,7 @@ const PlayGround = () => {
   });
   const [zoomLevel, setZoomLevel] = useState(1);
   const svgRef = useRef<SVGSVGElement>(null);
-  const [viewBox, setViewBox] = useState({ width: 0, height: 0 });
+  const [viewBox, setViewBox] = useState({x:0,y:0, width: 0, height: 0 });
   // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
 
   const handleZoomIn = () => {
@@ -45,16 +45,23 @@ const PlayGround = () => {
   const handleMouseMove: MouseEventHandler<SVGSVGElement> = (e) => {
     setChildCoord({ x: e.clientX, y: e.clientY });
   };
+  const handleMouseDown:MouseEventHandler<SVGSVGElement> = (e)=>{
+    const svgElement = svgRef.current;
+    if(!svgElement) return;
+    const point = svgElement?.createSVGPoint();
+    point.x = e.clientX;
+    point.y = e.clientY;
+    const mousePosition = point.matrixTransform(svgElement.getScreenCTM()?.inverse());
+    console.log(mousePosition,e.clientX,e.clientY)
+  }
 
   useEffect(() => {
     const svgRect = svgRef.current?.getBBox();
     // const svgEl = svgRef.current?.ownerSVGElement;
     if (!svgRect) return;
-    setViewBox({
-      width: svgRect.right - svgRect.left,
-      height: svgRect.bottom - svgRect.top,
-    });
-  }, [childCoord]);
+    console.log(svgRect)
+    setViewBox(svgRect);
+  }, []);
 
   //Downloading Image
   const captureSVG = async () => {
@@ -127,15 +134,14 @@ const PlayGround = () => {
             <svg
               // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
               ref={svgRef}
-              viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
+              viewBox={`${0} ${0} ${viewBox.width-viewBox.x} ${viewBox.height-viewBox.y}`}
               onMouseMove={handleMouseMove}
+              onMouseDown={handleMouseDown}
               style={{
                 transform: `scale(${zoomLevel})`,
-                transformOrigin: `left top`,
+                // transformOrigin: `left top`,
                 width: `${100 * zoomLevel}%`,
                 height: `${100 * zoomLevel}%`,
-                minWidth: `${viewBox.width}`,
-                minHeight: `${viewBox.height}`,
 
                 // backgroundImage:
                 //   "conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)",

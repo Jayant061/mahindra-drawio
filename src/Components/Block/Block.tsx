@@ -127,6 +127,7 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
 </rect>
 
     );
+    
     if (isBlockDrag.current) {
       setTransform({
         x:
