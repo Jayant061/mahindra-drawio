@@ -7,8 +7,7 @@ import "./Playground.css";
 import d3ToPng from "d3-svg-to-png";
 import Block from "../../Components/Block/Block.tsx";
 import ParallelLine from "../../Components/Lines/ParallelLine.tsx";
-import { height, width } from "@fortawesome/free-solid-svg-icons/faHouse";
-
+ 
 interface Shape {
   name: string;
   x: number;
@@ -16,6 +15,7 @@ interface Shape {
   radius?: number;
   id: string;
 }
+
 interface block {
   id: string;
   name: string;
@@ -23,7 +23,7 @@ interface block {
   y: number;
   elements: string[];
 }
-
+ 
 const PlayGround = () => {
   const [shapes, setShapes] = useState<block[]>(JSON);
   const [childCoord, setChildCoord] = useState<{ x: number; y: number }>({
@@ -31,52 +31,56 @@ const PlayGround = () => {
     y: 0,
   });
   const [zoomLevel, setZoomLevel] = useState(1);
-  const svgGrpRef = useRef<SVGGElement>(null)
-  const [blockRect, setBlockRect] = useState(<rect />)
-  const isBlockDrag = useRef<boolean>(false);
-  const [blockCoords, setBlockCoords] = useState({ x: 0, y: 0 })
-  const [transform, setTransform] = useState({ x: 0, y: 0 });
-  const [prevTransform, setPrevTransform] = useState({ x: 0, y: 0 });
-  const [viewBox, setViewBox] = useState({width:0, height:0})
-
+  const svgRef = useRef<SVGSVGElement>(null);
+  const svgRect = svgRef.current?.getBBox();
+  const [viewBox, setViewBox] = useState({ width: 0, height: 0 });
   // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
 
+
+  const [fixedScale, setfixedScale] = useState(1);
+ 
   const handleZoomIn = () => {
+    setfixedScale((prevfixedScale) => prevfixedScale / 1.2)
     setZoomLevel((prevZoomLevel) => prevZoomLevel * 1.2);
   };
-
+ 
   const handleZoomOut = () => {
+    setfixedScale((prevfixedScale) => prevfixedScale * 1.2)
     setZoomLevel((prevZoomLevel) => prevZoomLevel / 1.2);
   };
-
+ 
   const handleMouseMove: MouseEventHandler<SVGSVGElement> = (e) => {
     setChildCoord({ x: e.clientX, y: e.clientY });
   };
 
+  const handleMouseLeave: MouseEventHandler<SVGSVGElement> = (e) => {
+    
+  }
+ 
   useEffect(() => {
-    const svgRect = svgRef.current?.getBBox();
     // const svgEl = svgRef.current?.ownerSVGElement;
     if (!svgRect) return;
     setViewBox({
-      width: svgRect.right - svgRect.left,
-      height: svgRect.bottom - svgRect.top,
+      width: svgRect.width + 150,
+      height: svgRect.height + 100,
     });
-  }, [childCoord]);
-
+  }, [svgRect?.width, svgRect?.height]);
+ 
   //Downloading Image
   const captureSVG = async () => {
+    console.log(fixedScale)
     try {
       const svgSelector = "svg";
       const fileName = "canvas_image";
       const fileData = await d3ToPng(svgSelector, fileName, {
-        scale: 3,
+        scale: fixedScale,
         format: "png",
         quality: 1,
         download: false,
         ignore: ".ignored",
         background: "white",
       });
-
+ 
       const downloadLink = document.createElement("a");
       downloadLink.href = fileData;
       downloadLink.download = `${fileName}.png`; // Specify the file extension
@@ -85,24 +89,27 @@ const PlayGround = () => {
       console.error("Error capturing SVG:", error);
     }
   };
-
-
-
-  const handleMouseDown: MouseEventHandler = (e) => {
-    isBlockDrag.current = true;
-    setBlockCoords({ x: e.clientX, y: e.clientY });
-  }
-
-  const handleMouseUp = () => {
-    isBlockDrag.current = false;
-    setPrevTransform(transform);
-  }
-  
-  const handleMouseLeave: MouseEventHandler = (e) => {
-       isBlockDrag.current = false;
-  }
-
-
+ 
+  const blocks = shapes.map((shape, index) => {
+    return (
+      <Block
+        key={index}
+        id={index}
+        childCoord={childCoord}
+        shapes={shape}
+        zoomLevel={zoomLevel}
+      />
+    );
+  });
+ 
+ 
+  const Connections = shapes.map((shape, index) => {
+ 
+    if(index >= 1){
+      return (<ParallelLine key={index} x1={shapes[index-1].x + 500} y1={shape.y} x2={shape.x + 500} y2={shape.y} />);
+    }
+  });
+ 
   return (
     <>
       <div className="playground">
@@ -113,14 +120,14 @@ const PlayGround = () => {
           </div>
           <div
             className="svg"
-            // style={{ backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10}px ${zoomLevel * 10}px` }}>
-            style={{
-              backgroundImage:
-                "conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)",
-              backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${
-                zoomLevel * 10
-              }px ${zoomLevel * 10}px`,
-            }}
+            // style={{ backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10}px ${zoomLevel * 10}px` }}
+            //  style={{
+            //   backgroundImage:
+            //     "conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)",
+            //   backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${
+            //     zoomLevel * 10
+            //   }px ${zoomLevel * 10}px`,
+            // }} 
           >
             <div className="menu">
               <Menu />
@@ -128,41 +135,36 @@ const PlayGround = () => {
               <button onClick={handleZoomOut}>ZOut</button>
             </div>
             {/* <div                 className="SVG_Canvas"> */}
-              <svg
-                viewBox={`0 0 ${viewBoxCoordinates.x} ${viewBoxCoordinates.y}`}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                style={{
-                  transform: `scale(${zoomLevel})`,
-                  transformOrigin: `left top`,
-                  width: `${100 * zoomLevel}%`,
-                  height: `${100 * zoomLevel}%`,
-                  minWidth:"200%",
-                  minHeight:"200%",
-                  backgroundImage:"conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)",
-                  backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10}px ${zoomLevel * 10}px`
-                }}
-              >
-                <g
-                  transform={`translate(${transform.x} ${transform.y})`}
-                  onMouseDown={handleMouseDown}
-                  onMouseUp={handleMouseUp}
-                  key={"block1"}
-                  style={isBlockDrag.current ? { border: "2px solid gray" } : {}}
-                  ref={svgGrpRef}
-                >
-                  {blockRect}
-                  
-                  <Block shapes={shapes}/>
-                </g>
-              </svg>
-            </div>
-
+            <svg
+              // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
+              ref={svgRef}
+              viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                transform: `scale(${zoomLevel})`,
+                transformOrigin: `left top`,
+                width: `${100}%`,
+                height: `${100}%`,
+                minWidth: `${viewBox.width}`,
+                minHeight: `${viewBox.height}`,
+ 
+                backgroundImage:
+                "conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)",
+                backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${
+                  zoomLevel * 10
+                }px ${zoomLevel * 10}px`,
+              }}
+            >
+              {blocks}
+              {Connections}
+            </svg>
           </div>
         </div>
+      </div>
       {/* </div> */}
     </>
   );
 };
-
+ 
 export default PlayGround;
