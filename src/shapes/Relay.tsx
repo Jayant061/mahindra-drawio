@@ -10,7 +10,7 @@ interface RelayProps {
 
 }
 
-const Relay: FC<RelayProps> = ({ x, y, radius}) => {
+const Relay: FC<RelayProps> = ({ x, y, radius}):JSX.Element => {
   const elementRef = useRef<SVGGElement>(null);
 const arr=[];
 for(let i =0;i<=5;i++){

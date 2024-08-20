@@ -1,0 +1,57 @@
+:root{
+    --showBlockOrComponentTextColor:#254C5A;
+    --borderColor:#E5E5E5;
+}
+.createBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    /* width: 30vw; */
+    min-width:500px ;
+    .blockSubsection{
+        padding:1rem;
+        border-bottom: 2px solid lightgray;
+    }
+    .blockHeading{
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        color: var(--showBlockOrComponentTextColor);
+        display: flex;
+        justify-content: space-between;
+    }
+    .bockInput{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        .selectBlock{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            label{
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--showBlockOrComponentTextColor);
+            }
+            select{
+                flex: 1;
+                font-size: 1rem;
+                padding: 0.5rem 0;
+                outline: none;
+                border: 2px solid var(--borderColor);
+                border-radius: 0.25rem;
+            }
+        }
+    }
+    .blockDetails{
+        display: flex;
+        p#emptyBlock{
+            padding: 5rem;
+            margin: auto;
+            font-weight: 200;
+            font-size: 0.8rem;
+            color: #3A3A3A80;
+        }
+    }
+}

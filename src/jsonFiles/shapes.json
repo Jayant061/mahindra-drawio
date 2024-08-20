@@ -13,5 +13,12 @@
       "x": 1060,
       "y": 60,
       "elements": ["Relay", "EnergyMeter", "Transformer"]
+    },
+    {
+      "id": "b3",
+      "name": "Block1",
+      "x": 1560,
+      "y": 60,
+      "elements": ["Relay", "EnergyMeter", "Transformer"]
     }
 ]
