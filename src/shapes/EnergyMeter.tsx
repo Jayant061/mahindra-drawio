@@ -19,10 +19,10 @@ const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id,radius}) => {
       // transform={`translate(${0} ${y})`}
       onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     >
-      <circle cx={x+210} cy={y} r={radius}/>
+      <circle cx={x-radius} cy={y} r={radius}/>
       <text
         id={`EMText1`}
-        x={x+210}
+        x={x-radius}
         y={y}
         fontFamily='sans-serif'
         stroke='none'

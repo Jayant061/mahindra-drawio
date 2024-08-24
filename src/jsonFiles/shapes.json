@@ -2,22 +2,22 @@
     {
       "id": "b1",
       "name": "Block1",
-      "x": 60,
+      "x": 10,
       "y": 60,
-      "elements": ["Relay", "EnergyMeter", "Transformer"]
+      "elements": ["Relay","Inverter", "EnergyMeter", "Transformer"]
     },
 
     {
       "id": "b3",
       "name": "Block1",
-      "x": 1060,
+      "x": 710,
       "y": 60,
       "elements": ["Relay", "EnergyMeter", "Transformer"]
     },
     {
       "id": "b3",
       "name": "Block1",
-      "x": 1560,
+      "x": 1610,
       "y": 60,
       "elements": ["Relay", "EnergyMeter", "Transformer"]
     }

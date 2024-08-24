@@ -37,7 +37,7 @@
             select{
                 flex: 1;
                 font-size: 1rem;
-                padding: 0.5rem 0;
+                padding: 0.5rem;
                 outline: none;
                 border: 2px solid var(--borderColor);
                 border-radius: 0.25rem;
@@ -52,6 +52,22 @@
             font-weight: 200;
             font-size: 0.8rem;
             color: #3A3A3A80;
+        }
+    }
+    .btn{
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+        button{
+            width: 5rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            background-color: #70707033;
+            color: #707070;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 500;
         }
     }
 }
