@@ -43,8 +43,8 @@ function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX }
               <Relay
                 key={element.id}
                 id={element.id}
-                x1={elementStartX}
-                y1={distanceFromTop}
+                x={elementStartX}
+                y={distanceFromTop}
                 radius={radius}
               />
               <Connector

@@ -3,12 +3,11 @@
   padding: 0;
 }
 
-.app  {
+.app {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  
-  /* .drawingArea {} */
+
 }
 
 .menu {
@@ -16,19 +15,20 @@
   right: 2rem;
   display: flex;
   flex-direction: row-reverse;
-  flex-wrap:nowrap;
+  flex-wrap: nowrap;
   padding: 1.5rem;
 }
+
 div.container {
   width: 100%;
   display: flex;
   justify-content: start;
   position: relative;
+
   div.leftbar {
     width: 18%;
     min-width: 300px;
-    box-shadow: 2px 0 2px  lightgray;
-  }
-    
+    box-shadow: 2px 0 2px lightgray;
   }
 
+}

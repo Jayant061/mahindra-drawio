@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./Leftbar.css"
 import plusIcon from "../../assets/plus.png"
 import CreateBlock from './CreateBlock/CreateBlock'
+import CreateComponent from './CreateComponent/CreateComponent'
 
 function Leftbar() {
   const [showDialog,setShowDialog] = useState<string>("")
@@ -19,6 +20,9 @@ function Leftbar() {
           </div>}
           {
             showDialog==="block" && <CreateBlock/>
+          }
+          {
+            showDialog==="component" && <CreateComponent />
           }
 
         </section>}

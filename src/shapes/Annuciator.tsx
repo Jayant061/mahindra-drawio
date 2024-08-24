@@ -1,15 +1,20 @@
-import { FC, useRef, } from 'react';
- 
+import { FC, useEffect, useRef, useState, } from 'react';
+
 interface AnnuciatorProps {
   x: number;
   y: number;
   id: string,
 }
- 
-const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, }) => {
+
+const Annuciator: FC<AnnuciatorProps> = ({ x, y, id, }) => {
   const elementRef = useRef<SVGGElement>(null);
   const width = 100;
   const height = width / 2;
+
+
+  useEffect(()=>{
+     console.log(elementRef.current?.getBBox())
+  }, [elementRef.current?.getBBox().height, elementRef.current?.getBBox().width])
 
   return (
     <g
@@ -18,14 +23,13 @@ const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, }) => {
       stroke="green"
       strokeWidth="0.5"
       id={`Annuciator${id}`}
-      // transform={`translate(${x} ${y})`}
-      onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
+      onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}
     >
-      <rect width={width} height={height} x={x-width} y={y-height/2} id={`InverterReactangle1`} />
+      <rect width={width} height={height} x={x} y={y} id={`InverterReactangle1`} />
       <text
         id={`InvertedText1`}
-        x={x-0.5 * width}
-        y={y}
+        x={x + 0.5 * width}
+        y={y + 0.55 * height}
         width={width - 2}
         fontFamily='sans-serif'
         stroke='none'
@@ -39,7 +43,6 @@ const Annuciator: FC<AnnuciatorProps> = ({  x, y, id, }) => {
     </g>
   );
 };
- 
+
 export default Annuciator;
- 
- 
+

@@ -1,16 +1,15 @@
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
+
 
 interface RelayProps {
-  x1: number;
-  y1: number;
+  x: number;
+  y: number;
   id: string;
+  radius: number
 
-  radius: number;
 }
 
-const Relay: FC<RelayProps> = ({ x1, y1, radius }): JSX.Element => {
-  const x = x1-11*radius-10;
-  const y = y1;
+const Relay: FC<RelayProps> = ({ x, y, radius }): JSX.Element => {
   const elementRef = useRef<SVGGElement>(null);
   const arr = [];
   for (let i = 0; i <= 5; i++) {
@@ -23,7 +22,13 @@ const Relay: FC<RelayProps> = ({ x1, y1, radius }): JSX.Element => {
       case 1:
         text = "50";
         break;
+      case 1:
+        text = "50";
+        break;
 
+      case 2:
+        text = "51N";
+        break;
       case 2:
         text = "51N";
         break;
@@ -31,7 +36,13 @@ const Relay: FC<RelayProps> = ({ x1, y1, radius }): JSX.Element => {
       case 3:
         text = "51";
         break;
+      case 3:
+        text = "51";
+        break;
 
+      case 4:
+        text = "67N";
+        break;
       case 4:
         text = "67N";
         break;
@@ -41,42 +52,29 @@ const Relay: FC<RelayProps> = ({ x1, y1, radius }): JSX.Element => {
         break;
     }
     arr.push(
-      <g
-        key={i}
-      >
-        <circle
-          cx={x + 2 * i * (radius + 1)}
-          cy={y}
-          r={radius}
-          style={{ margin: "0", padding: "0" }}
-        />
+      <g key={i} >
+        <circle cx={x + 2 * i * (radius + 1)} cy={y} r={radius} style={{ margin: "0", padding: "0" }} />
         <text
           x={x + 2 * i * (radius + 1)}
           y={y}
           textAnchor="middle"
           dominantBaseline="middle"
-          stroke="none"
-          fill="black"
-        >
-          {text}{" "}
-        </text>
+          stroke='none'
+          fill='black'>
+          {text}  </text>
       </g>
-    );
+    )
   }
+
+  const showBoundaries = () => {
+    setshowBoundary(prev => !prev);
+    console.log(elementRef.current?.getBBox())
+  }
+
   return (
-    <g
-      ref={elementRef}
-      fill="white"
-      stroke="black"
-      strokeWidth="1"
-      x={x}
-      y={y}
+    <g ref={elementRef} fill="white" stroke="black" strokeWidth="1" x={x} y={y}
       className={"relay"}
-      onMouseDown={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
-      // onMouseUp={handleMouseUp}
+      onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}
     >
       {arr}
     </g>

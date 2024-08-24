@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react'
 import "./MenuElement.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
-import MenuElementImages from '../Menu-Element-Images/MenuElementImages';
 
 interface MenuElementProps {
     id: string,
