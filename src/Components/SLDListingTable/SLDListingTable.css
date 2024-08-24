@@ -1,0 +1,102 @@
+.configures {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+
+    .addSLDButton {
+        button {
+            padding: 0.8rem 1.3rem;
+            background-color: #8BBB04;
+            color: white;
+            justify-content: center;
+            display: flex;
+            gap: 0.5rem;
+            border: none;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    }
+
+    .searchAndDelete {
+        display: flex;
+        gap: 1rem;
+
+        .searchDiv {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.8px solid #707070;
+            padding: 0.3rem 0.7rem 0.3rem 0.5rem;
+            border-radius: 3px;
+
+            input {
+                width: 17rem;
+                padding: 0.5rem 1rem;
+                border: none;
+            }
+        }
+
+        .downloadDiv {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            border: 1px solid #C0C0C0;
+            border-radius: 4px;
+        }
+
+        .deleteDiv {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            border: 1px solid #C0C0C0;
+            border-radius: 4px;
+        }
+    }
+}
+
+.SLDtable {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Roboto;
+
+        thead {
+            tr {
+                th {
+                    border: 1px solid gray;
+                    padding: 0.8rem 1.5rem;
+                    background-color: #ECEDF0;
+                    .title{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    border: 1px solid gray;
+                    padding: 0.8rem 1.5rem;
+                    .name {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        img {
+                            height: 7rem;
+                            width: 7rem;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}

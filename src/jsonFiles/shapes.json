@@ -1,24 +1,38 @@
 [
+  [
     {
-      "id": "b1",
+      "id": "b1r1",
       "name": "Block1",
       "x": 60,
       "y": 60,
-      "elements": ["Relay", "EnergyMeter", "Transformer"]
+      "elements": [
+        "Relay",
+        "EnergyMeter",
+        "Annuciator",
+        "Breaker"
+      ]
     },
-
     {
-      "id": "b3",
+      "id": "b2r1",
+      "name": "Block1",
+      "x": 560,
+      "y": 60,
+      "elements": [
+        "Relay",
+        "EnergyMeter",
+        "Breaker"
+      ]
+    },
+    {
+      "id": "b3r1",
       "name": "Block1",
       "x": 1060,
       "y": 60,
-      "elements": ["Relay", "EnergyMeter", "Transformer"]
-    },
-    {
-      "id": "b3",
-      "name": "Block1",
-      "x": 1560,
-      "y": 60,
-      "elements": ["Relay", "EnergyMeter", "Transformer"]
+      "elements": [
+        "Relay",
+        "EnergyMeter",
+        "Annuciator"
+      ]
     }
+  ]
 ]

@@ -29,7 +29,7 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
   const [prevTransform, setPrevTransform] = useState({ x: 0, y: 0 });
   const svgGrpRef = useRef<SVGGElement>(null);
 
-  const lines = renderLines(shapes.elements, shapes.x, shapes.y,gap);
+  const lines = renderLines(shapes.elements, shapes.x, shapes.y, gap);
   const renderShapes = () => {
     return shapes.elements.map((shape, index) => {
       switch (shape) {
@@ -57,7 +57,7 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
             <Inverter
               key={index}
               id={shapes.id + "realy" + index}
-              x={shapes.x + 100 + 11*radius+10-100}
+              x={shapes.x + 100 + 11 * radius + 10 - 100}
               y={shapes.y + gap * (index + 1)}
             />
           );
@@ -67,7 +67,7 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
               key={index}
               id={shapes.id + "realy" + index}
               x={shapes.x + 500}
-              y={shapes.y + gap* (index + 1)}
+              y={shapes.y + gap * (index + 1)}
             />
           );
         case "Annuciator":
@@ -75,8 +75,8 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
             <Annuciator
               key={index}
               id={shapes.id + "realy" + index}
-              x={shapes.x + 100}
-              y={shapes.y + gap * (index + 1)}
+              x={shapes.x + 130}
+              y={shapes.y - 25 + gap * (index + 1)}
             />
           );
         case "EnergyMeter":
@@ -85,7 +85,7 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
               key={index}
               id={shapes.id + "realy" + index}
               x={shapes.x + 100}
-              y={shapes.y + gap*(index + 1)}
+              y={shapes.y + gap * (index + 1)}
               radius={radius}
             />
           );
@@ -108,26 +108,26 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
     if (!rect || !GrpEL) return;
     setBlockRect(
       <rect
-  x={rect.x}
-  y={rect.y}
-  width={rect.width}
-  height={rect.height}
-  fill="transparent"
-  stroke={isBlockDrag.current ? "blue" : "transparent"}
-  style={{ cursor: "auto" }}
-  strokeDasharray="5,5"
->
-  <animate
-    attributeName="stroke-dashoffset"
-    from="0"
-    to="10"
-    dur="0.2s"
-    repeatCount="indefinite"
-  />
-</rect>
+        x={rect.x}
+        y={rect.y}
+        width={rect.width}
+        height={rect.height}
+        fill="transparent"
+        stroke={isBlockDrag.current ? "blue" : "transparent"}
+        style={{ cursor: "auto" }}
+        strokeDasharray="5,5"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="10"
+          dur="0.2s"
+          repeatCount="indefinite"
+        />
+      </rect>
 
     );
-    
+
     if (isBlockDrag.current) {
       setTransform({
         x:
@@ -153,7 +153,7 @@ function Block({ shapes, id, childCoord, zoomLevel }: blockProps) {
       {blockRect}
       {renderShapes()}
       {lines.connector}
-      {lines.lines}
+      {/* {lines.lines} */}
     </g>
   );
 }

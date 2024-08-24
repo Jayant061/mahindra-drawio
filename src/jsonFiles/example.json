@@ -1,0 +1,206 @@
+{
+  "id": "qwe",
+  "type": "plant",
+  "name": "Plant1",
+  "blocks": [
+    {
+      "id": "207",
+      "type": "block",
+      "name": "Block207",
+      "x": 300,
+      "y": 100,
+      "assets": [
+        {
+          "id": "18710",
+          "name": "EnergyMeter",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": []
+        },
+        {
+          "id": "18711",
+          "name": "Transformer",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18600",
+              "connection_type": "unknown"
+            },
+            {
+              "id": "18712",
+              "connection_type": "communication"
+            },
+            {
+              "id": "18713",
+              "connection_type": "electrical"
+            },
+            {
+              "id": "18714",
+              "connection_type": "electrical"
+            },
+            {
+              "id": "18715",
+              "connection_type": "electrical"
+            },
+            {
+              "id": "18716",
+              "connection_type": "electrical"
+            },
+            {
+              "id": "18718",
+              "connection_type": "electrical"
+            }
+          ]
+        },
+        {
+          "id": "18712",
+          "name": "Annuciator",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "communication"
+            }
+          ]
+        },
+        {
+          "id": "18713",
+          "name": "Inverter",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "electrical"
+            }
+          ]
+        },
+        {
+          "id": "18714",
+          "name": "Inverter",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "electrical"
+            }
+          ]
+        },
+        {
+          "id": "18715",
+          "name": "Inverter",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "electrical"
+            }
+          ]
+        },
+        {
+          "id": "18716",
+          "name": "Inverter",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "electrical"
+            }
+          ]
+        },
+        {
+          "id": "18717",
+          "name": "Relay",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": []
+        },
+        {
+          "id": "18718",
+          "name": "Breaker",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "electrical"
+            },
+            {
+              "id": "18602",
+              "connection_type": "electrical"
+            }
+          ]
+        },
+        {
+          "id": "18747",
+          "name": "WeatherStation",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "active",
+          "connectedTo": []
+        }
+      ]
+    },
+    {
+      "id": "222",
+      "type": "block",
+      "name": "Block222",
+      "x": 600,
+      "y": 100,
+      "assets": [
+        {
+          "id": "18600",
+          "name": "Anemometer",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "Inactive",
+          "connectedTo": [
+            {
+              "id": "18711",
+              "connection_type": "unknown"
+            }
+          ]
+        },
+        {
+          "id": "18602",
+          "name": "Breaker",
+          "type": "asset",
+          "x": 12,
+          "y": 12,
+          "status": "Inactive",
+          "connectedTo": [
+            {
+              "id": "18718",
+              "connection_type": "electrical"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

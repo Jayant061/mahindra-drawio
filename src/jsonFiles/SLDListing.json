@@ -1,0 +1,38 @@
+[
+    {
+      "sldId":"21663bef-226d-435c-9dbf-0da60cfe04fe",
+      "sldName": "SLD 001",
+      "powerPlantId": "25",
+      "createdBy": "Ridham",
+      "updatedBy": "Ridham",
+      "lastUpdated": "Aug 8 , 2024 10:20 AM",
+      "status": "Completed"
+    },
+    {
+      "sldId":"03b638fc-9be2-4d1d-b694-81da2ddcb8e1",
+      "sldName": "SLD 002",
+      "powerPlantId": "25",
+      "createdBy": "Prathmesh",
+      "updatedBy": "Prathmesh",
+      "lastUpdated": "Aug 9 , 2024 10:20 AM",
+      "status": "Completed"
+    },
+    {
+      "sldId":"9aa18666-c496-42f1-a0b5-c803fb18cbfe",
+      "sldName": "SLD 003",
+      "powerPlantId": "25",
+      "createdBy": "Vibhor",
+      "updatedBy": "Vibhor",
+      "lastUpdated": "Aug 8 , 2024 10:20 AM",
+      "status": "Draft"
+    },
+    {
+      "sldId":"79caebb2-a15a-49ca-813f-b9cc80ce48ac",
+      "sldName": "SLD 004",
+      "powerPlantId": "25",
+      "createdBy": "Jayant",
+      "updatedBy": "Jayant",
+      "lastUpdated": "Aug 8 , 2024 10:20 AM",
+      "status": "Completed"
+    }
+  ]
