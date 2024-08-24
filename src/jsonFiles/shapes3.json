@@ -15,7 +15,10 @@
           "name": "EnergyMeter",
           "type": "asset",
           "status": "Active",
-          "connectedTo": []
+          "connectedTo": [
+            {"id":18712,
+          "connection_type":"communication"}
+          ]
         },
         {
           "id": "18712",

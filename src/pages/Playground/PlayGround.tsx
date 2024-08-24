@@ -60,7 +60,16 @@ const PlayGround = () => {
     const point = new DOMPoint(e.clientX, e.clientY);
     const svgPoint = point.matrixTransform(svg.getScreenCTM()!.inverse());
     // Convert the screen coordinates to SVG coordinates
-    setChildCoord({ x: svgPoint.x, y: svgPoint.y });
+    
+    setChildCoord(prevCoord=>{
+      if(Math.abs(prevCoord.x-svgPoint.x)>5 ||Math.abs(prevCoord.y-svgPoint.y)>5){
+        return { x: svgPoint.x, y: svgPoint.y }
+      }
+      else{
+        return prevCoord
+      }
+      
+    });
   };
 
   const handleMouseLeave: MouseEventHandler<SVGSVGElement> = () => {};
@@ -118,8 +127,8 @@ const PlayGround = () => {
     const mainLineDistance = 200
     return (
       <React.Fragment key={block.id}>
-      <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} elementStartX={120} />
     {index<shapes.blocks.length-1 && <StepLine key={index+"blockLine"} x1={block.x+mainLineDistance+120} y1={block.y} x2={shapes.blocks[index+1].x+mainLineDistance+120} y2={shapes.blocks[index+1].y}/>}
+      <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} elementStartX={120} />
       </React.Fragment>
     );
   });
