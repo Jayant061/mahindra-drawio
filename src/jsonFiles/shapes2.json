@@ -1,0 +1,36 @@
+[
+    {
+        "id":"001",
+        "x":50,
+        "y":20,
+        "elements":[
+            {
+                "id":"101",
+                "type":"Annuciator",
+                "connectedTo":["201","202"]
+            },
+            {
+              "id":"102",
+                "type":"Annuciator",
+                "connectedTo":["201","202"]  
+            }
+        ]
+    },
+    {
+        "id":"002",
+        "x":100,
+        "y":20,
+        "elements":[
+            {
+                "id":"101",
+                "type":"Relay",
+                "connectedTo":["101","202"]
+            },
+            {
+              "id":"102",
+                "type":"Inverter",
+                "connectedTo":["201","202"]
+            }
+        ]
+    }
+]

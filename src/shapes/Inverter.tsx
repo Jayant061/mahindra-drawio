@@ -23,6 +23,8 @@ const Inverter: FC<InverterProps> = ({  x,y, id}) => {
   // const isClicked = useRef<boolean>(false);
   const width = 100;
   const height = width / 2;
+  const smallRectWidth = 8;
+  const smallRectHeight = 5
   
   // useEffect(()=>{
   //   if(isClicked.current){
@@ -59,12 +61,12 @@ const Inverter: FC<InverterProps> = ({  x,y, id}) => {
       onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
       onClick={()=>{console.log(id)}}
     >
-      <rect width={width} height={height} x={x} y={y} id={`InverterReactangle1`} />
-      <rect width={0.1*width} height={0.1*height} x={x+width/2} y={y-0.05*height} id={`InverterReactangle2`} fill='green' />
+      <rect width={width} height={height} x={x-(width/2)} y={y} id={`InverterReactangle1`} />
+      <rect width={smallRectWidth} height={smallRectHeight} x={x-(smallRectWidth/2)} y={y-smallRectHeight} id={`InverterReactangle2`} fill='green' />
       <text
         id={`InverterText1`}
-        x={x+0.5 * width}
-        y={y+0.55 * height}
+        x={x}
+        y={y+0.5*height}
         width={width - 2}
         fontFamily='sans-serif'
         stroke='none'
@@ -72,7 +74,7 @@ const Inverter: FC<InverterProps> = ({  x,y, id}) => {
         fontSize={10}
         textAnchor="middle"
         dominantBaseline="middle"
-      >LT Pannel {id}
+      >LT Pannel
       </text>
     </g>
   );
