@@ -1,146 +1,26 @@
 import React, {  MouseEventHandler, useEffect, useRef, useState } from "react";
 // import { Shape } from "../../models/Shape";
-import EnergyMeter from "../../shapes/EnergyMeter";
-import Annuciator from "../../shapes/Annuciator";
-import Breaker from "../../shapes/Breaker";
-import Inverter from "../../shapes/Inverter";
-import Transformer from "../../shapes/Transformer";
-import Relay from "../../shapes/Relay";
+
 import { Blocks, Plant } from "../../models/Shape";
-import Connector from "../../shapes/Connector";
+import { renderShapes } from "./RenderAssets";
 interface blockProps {
   block: Blocks;
   id: string;
   childCoord: { x: number; y: number };
-  // zoomLevel: number;
-  // origin:{x:number,y:number}
   mainLineDistance:number;
   setShape:React.Dispatch<React.SetStateAction<Plant>>
+  setIsBlockDrag:React.Dispatch<React.SetStateAction<boolean>>
   elementStartX:number;
+  isMouseLeave:boolean;
 }
-function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX }: blockProps) {
-  const radius = 20;
-  const gap = 30;
-  const transformerLength = 120;
-  const rectLength = 50
-  const breakerLength = 70;
-  let distanceFromTop = gap;
+function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX,setIsBlockDrag,isMouseLeave  }: blockProps) {
+
   const [blockRect, setBlockRect] = useState(<rect key={"emptyrect"+id} />);
   const isBlockDrag = useRef<boolean>(false);
   const [blockCoords, setBlockCoords] = useState({ x: 0, y: 0 });
   const [transform, setTransform] = useState({ x: block.x, y: block.y });
   const [prevTransform, setPrevTransform] = useState({ x: block.x, y: block.y });
   const svgGrpRef = useRef<SVGGElement>(null);
-  // const [distanceBetweenComp,setDistanceBetweenComp,] = useState<number>(10);
-  const renderShapes = () => {
-    const rect = svgGrpRef.current?.getBBox();
-    if(!rect)return;
-    return block.elements.map((element, index) => {
-      switch (element.name) {
-        case "Relay":
-          return (
-            <React.Fragment key={element.id}>
-              <Relay
-                key={element.id}
-                id={element.id}
-                x={elementStartX}
-                y={distanceFromTop}
-                radius={radius}
-              />
-              <Connector
-                id="connector1"
-                key={"connector"+element.id}
-                x1={elementStartX}
-                y1={distanceFromTop}
-                x={elementStartX + mainLineDistance}
-                y={distanceFromTop}
-              />
-              {distanceFromTop +=(gap+2*radius)}
-            </React.Fragment>
-          );
-        case "Transformer":
-          return (
-            <React.Fragment key={element.id}>
-            <Transformer
-              key={element.id}
-              id={element.id}
-              x={elementStartX + mainLineDistance}
-              y={distanceFromTop}
-              
-              />
-            {distanceFromTop +=(gap+transformerLength)}
-              </React.Fragment>
-          );
-        case "Inverter":
-          return (
-            <React.Fragment key={element.id}>
-            <Inverter
-              key={element.id}
-              id={element.id}
-              x={elementStartX + mainLineDistance}
-              y={distanceFromTop}
-              />
-              {distanceFromTop +=(gap+rectLength)}
-              </React.Fragment>
-          );
-        case "Breaker":
-          return (
-            <React.Fragment key={element.id}>
-            <Breaker
-              key={element.id}
-              id={element.id}
-              x={elementStartX + mainLineDistance}
-              y={distanceFromTop}
-              />
-              {distanceFromTop +=(gap+breakerLength)}
-              </React.Fragment>
-          );
-        case "Annuciator":
-          return (
-            <React.Fragment key={element.id}>
-              <Annuciator
-                key={element.id}
-                id={element.id}
-                x={elementStartX}
-                y={distanceFromTop}
-              />
-              <Connector
-                id="connector1"
-                key={"connector"+element.id}
-                x1={elementStartX}
-                y1={distanceFromTop}
-                x={elementStartX + mainLineDistance}
-                y={distanceFromTop}
-              />
-              {distanceFromTop +=(gap+rectLength)}
-            </React.Fragment>
-          );
-        case "EnergyMeter":
-          return (
-            <React.Fragment key={element.id}>
-              <EnergyMeter
-                
-                id={element.id + "realy" + index}
-                x={elementStartX}
-                y={distanceFromTop}
-                radius={radius}
-              />
-              <Connector
-                id="connector1"
-                key={"connector"+element.id}
-                x1={elementStartX}
-                y1={distanceFromTop}
-                x={elementStartX + mainLineDistance}
-                y={distanceFromTop}
-              />
-              {distanceFromTop +=(gap+2*radius)}
-            </React.Fragment>
-          );
-        default:
-          return null;
-      }
-    });
-  };
   useEffect(() => {
     setShape((prevShape) => {
       const newBlocks = prevShape.blocks.map((block) => {
@@ -153,9 +33,15 @@ function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX }
       return { ...prevShape, blocks: newBlocks };
     });
   }, [transform]);
+  useEffect(()=>{
+    if(isMouseLeave){
+      handleMouseUp();
+    }
+  },[isMouseLeave])
   
   const handleMouseDown: MouseEventHandler<SVGGElement> = (e) => {
     isBlockDrag.current = true;
+    setIsBlockDrag(true)
     const svg = e.currentTarget.ownerSVGElement!;
     const point = new DOMPoint(e.clientX, e.clientY);
 
@@ -194,20 +80,12 @@ function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX }
     );
 
     if (isBlockDrag.current) {
-      // setTransform({
-      //   x:
-      //     (childCoord.x - blockCoords.x + prevTransform.x * zoomLevel) /
-      //     zoomLevel,
-      //   y:
-      //     (childCoord.y - blockCoords.y + prevTransform.y * zoomLevel) /
-      //     zoomLevel,
-      // });
       setTransform({
         x: childCoord.x - blockCoords.x + prevTransform.x,
         y: childCoord.y - blockCoords.y + prevTransform.y,
       });
     }
-  }, [childCoord, isBlockDrag]);
+  }, [childCoord, isBlockDrag.current]);
   return (
     <g
       transform={`translate(${transform.x} ${transform.y})`}
@@ -225,12 +103,11 @@ function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX }
         x1={elementStartX + mainLineDistance}
         y1={0}
         x2={elementStartX + mainLineDistance}
-        y2={renderShapes()?.length && distanceFromTop}
+        y2={renderShapes(block.elements,svgGrpRef.current?.getBBox(),elementStartX,mainLineDistance)?.distanceFromTop}
         stroke="black"
         strokeWidth="1"
         />
-        {distanceFromTop = gap}
-      {renderShapes()}
+      {renderShapes(block.elements,svgGrpRef.current?.getBBox(),elementStartX,mainLineDistance)?.shapes}
 
       {/* {lines.connector}
       {lines.lines} */}

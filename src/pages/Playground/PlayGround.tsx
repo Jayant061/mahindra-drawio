@@ -11,21 +11,6 @@ import { Plant } from "../../models/Shape.ts";
 // import Lines from "../../Components/Lines/Lines.tsx";
 import StepLine from "../../Components/Lines/StepLine.tsx";
 
-// interface Shape {
-//   name: string;
-//   x: number;
-//   y: number;
-//   radius?: number;
-//   id: string;
-// }
-
-// interface block {
-//   id: string;
-//   name: string;
-//   x: number;
-//   y: number;
-//   elements: string[];
-// }
 
 const PlayGround = () => {
   const [shapes, setShapes] = useState<Plant>(SLDData);
@@ -37,6 +22,7 @@ const PlayGround = () => {
   const svgParentRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [viewBox, setViewBox] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [isBlockDragging,setIsBlockDragging] = useState<boolean>(true)
   // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
 
   const [fixedScale, setfixedScale] = useState(1);
@@ -60,7 +46,7 @@ const PlayGround = () => {
     const point = new DOMPoint(e.clientX, e.clientY);
     const svgPoint = point.matrixTransform(svg.getScreenCTM()!.inverse());
     // Convert the screen coordinates to SVG coordinates
-    
+    if(!isBlockDragging)return;
     setChildCoord(prevCoord=>{
       if(Math.abs(prevCoord.x-svgPoint.x)>5 ||Math.abs(prevCoord.y-svgPoint.y)>5){
         return { x: svgPoint.x, y: svgPoint.y }
@@ -72,7 +58,7 @@ const PlayGround = () => {
     });
   };
 
-  const handleMouseLeave: MouseEventHandler<SVGSVGElement> = () => {};
+  const handleMouseLeave: MouseEventHandler<SVGSVGElement> = () => {setIsBlockDragging(false)};
 
   useEffect(() => {
     const padding = 50;
@@ -122,13 +108,12 @@ const PlayGround = () => {
   //     />
   //   );
   // });
-
   const blocks = shapes.blocks.map((block, index) => {
     const mainLineDistance = 200
     return (
       <React.Fragment key={block.id}>
     {index<shapes.blocks.length-1 && <StepLine key={index+"blockLine"} x1={block.x+mainLineDistance+120} y1={block.y} x2={shapes.blocks[index+1].x+mainLineDistance+120} y2={shapes.blocks[index+1].y}/>}
-      <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} elementStartX={120} />
+      <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} setIsBlockDrag={setIsBlockDragging} elementStartX={120} isMouseLeave={!isBlockDragging} />
       </React.Fragment>
     );
   });

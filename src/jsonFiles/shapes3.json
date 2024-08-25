@@ -16,7 +16,7 @@
           "type": "asset",
           "status": "Active",
           "connectedTo": [
-            {"id":18712,
+            {"id":"18712",
           "connection_type":"communication"}
           ]
         },
@@ -193,6 +193,43 @@
           ]
         }
       ]
-    }
+  },
+  {
+    "id": "223",
+    "type": "block",
+    "name": "Block222",
+    "x": 1000,
+    "y": 100,
+    "elements": [
+      {
+        "id": "18600",
+        "name": "Anemometer",
+        "type": "asset",
+        "x": 12,
+        "y": 12,
+        "status": "Active",
+        "connectedTo": [
+          {
+            "id": "18711",
+            "connection_type": "unknown"
+          }
+        ]
+      },
+      {
+        "id": "18602",
+        "name": "Breaker",
+        "type": "asset",
+        "x": 12,
+        "y": 12,
+        "status": "Active",
+        "connectedTo": [
+          {
+            "id": "18718",
+            "connection_type": "electrical"
+          }
+        ]
+      }
+    ]
+  }
   ]
 }

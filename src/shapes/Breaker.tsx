@@ -16,7 +16,6 @@ function Breaker(props: BreakerProps) {
 
   return (
     <g
-      onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}
       strokeWidth={3}
       fill={stroke}
       id={id}

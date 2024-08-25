@@ -17,7 +17,6 @@ const EnergyMeter: FC<EnergyMeterProps> = ({  x, y, id,radius}) => {
       strokeWidth="0.5"
       id={`EM${id}`}
       // transform={`translate(${0} ${y})`}
-      onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     >
       <circle cx={x-radius} cy={y} r={radius}/>
       <text

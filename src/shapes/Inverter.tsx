@@ -25,31 +25,6 @@ const Inverter: FC<InverterProps> = ({  x,y, id}) => {
   const height = width / 2;
   const smallRectWidth = 8;
   const smallRectHeight = 5
-  
-  // useEffect(()=>{
-  //   if(isClicked.current){
-  //     setCoord(
-  //       {x:(newCoordOnMove.x-offset.x)/zoomLevel,
-  //         y:(newCoordOnMove.y-offset.y)/zoomLevel
-  //       });
-  // }
-  // },[newCoordOnMove,offset])
-  
-  // const handleMouseDown:MouseEventHandler<SVGGElement> = (e)=>{
-  //   // console.log(rect,radius,coord);
-  //   setOffset({x:(e.clientX-coord.x*zoomLevel),y:(e.clientY-coord.y*zoomLevel)})
-  //   isClicked.current = true
-  //   // console.log(id)
-  // }
-
-
-  // const handleMouseUp = ()=>{
-  //     isClicked.current = false;
-  //     // console.log(coord.x, coord.y)
-  //     getData(id,{id,name,x:coord.x,y:coord.y})
-  // }
-
-  // const [color,setColor] = useSta("")
  
   return (
     <g
@@ -58,8 +33,6 @@ const Inverter: FC<InverterProps> = ({  x,y, id}) => {
       stroke="green"
       strokeWidth="0.5"
       id={`Inverter${id}`}
-      onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
-      onClick={()=>{console.log(id)}}
     >
       <rect width={width} height={height} x={x-(width/2)} y={y} id={`InverterReactangle1`} />
       <rect width={smallRectWidth} height={smallRectHeight} x={x-(smallRectWidth/2)} y={y-smallRectHeight} id={`InverterReactangle2`} fill='green' />

@@ -61,7 +61,6 @@ const Relay: FC<RelayProps> = ({ x, y, radius }): JSX.Element => {
   return (
     <g ref={elementRef} fill="white" stroke="black" strokeWidth="1" x={x} y={y}
       className={"relay"}
-      onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}
     >
       {arr}
     </g>
