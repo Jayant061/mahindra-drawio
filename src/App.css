@@ -1,34 +1,5 @@
-* {
+body, html{
   margin: 0;
-  padding: 0;
-}
-
-.app {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-
-}
-
-.menu {
-  position: absolute;
-  right: 2rem;
-  display: flex;
-  flex-direction: row-reverse;
-  flex-wrap: nowrap;
-  padding: 1.5rem;
-}
-
-div.container {
+  height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: start;
-  position: relative;
-
-  div.leftbar {
-    width: 18%;
-    min-width: 300px;
-    box-shadow: 2px 0 2px lightgray;
-  }
-
 }

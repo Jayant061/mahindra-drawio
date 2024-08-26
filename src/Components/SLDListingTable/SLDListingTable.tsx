@@ -23,6 +23,7 @@ interface Listing {
 
 const SLDListingTable = () => {
     const [isModalOpen, setisModalOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState(String);
     const [listings, setlistings] = useState<Listing[]>(JSON)
 
     const openModal = () => {
@@ -31,7 +32,7 @@ const SLDListingTable = () => {
 
     return (
         <>
-            {isModalOpen && <CreateSLDModal modalOpen={isModalOpen} />}
+            <CreateSLDModal modalOpen={isModalOpen} onClose={openModal} />
             <div className="configures">
                 <div className="addSLDButton">
                     <button
@@ -42,8 +43,12 @@ const SLDListingTable = () => {
                 </div>
                 <div className="searchAndDelete">
                     <div className="searchDiv">
-                        <input placeholder="Search" />
-                        <img src={SearchIcon} alt="search" />
+                        <input placeholder="Search"
+                            id="searchval"
+                             />
+                        <img src={SearchIcon} alt="search"
+                        onClick={() => setSearchValue(document.getElementById("searchval")?.value)}
+                        />
                     </div>
                     <div className="downloadDiv">
                         <img src={DownloadIcon} alt="download" />
@@ -74,37 +79,40 @@ const SLDListingTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listings.map((listing) => {
-                            return (<tr>
-                                <td><input type="checkbox" name="" id="" /></td>
-                                <td>
-                                    <div className='name'>
-                                        <img src={Inverter} alt="inverter" />
-                                        {listing.sldName}
-                                    </div>
-                                </td>
-                                <td>
-                                    {listing.powerPlantId}
-                                </td>
-                                <td>
-                                    {listing.createdBy}
+                        {
+                            listings
+                                .map((listing) => {
+                                    if (listing.sldName.toLowerCase().includes(searchValue.toLowerCase()))
+                                        return (<tr>
+                                            <td><input type="checkbox" name="" id="" /></td>
+                                            <td>
+                                                <div className='name'>
+                                                    <img src={Inverter} alt="inverter" />
+                                                    {listing.sldName}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {listing.powerPlantId}
+                                            </td>
+                                            <td>
+                                                {listing.createdBy}
 
-                                </td>
-                                <td>
-                                    {listing.updatedBy}
+                                            </td>
+                                            <td>
+                                                {listing.updatedBy}
 
-                                </td>
-                                <td>
-                                    {listing.lastUpdated}
+                                            </td>
+                                            <td>
+                                                {listing.lastUpdated}
 
-                                </td>
-                                <td>
-                                    {listing.status}
+                                            </td>
+                                            <td>
+                                                {listing.status}
 
-                                </td>
-                                <td></td>
-                            </tr>)
-                        })}
+                                            </td>
+                                            <td></td>
+                                        </tr>)
+                                })}
                     </tbody>
                 </table>
             </div>

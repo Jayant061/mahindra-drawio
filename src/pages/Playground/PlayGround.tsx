@@ -147,7 +147,7 @@ const PlayGround = () => {
               onMouseLeave={handleMouseLeave}
               style={{
                 transform: `scale(${zoomLevel})`,
-                transformOrigin: `top left`,
+                transformOrigin: `center`,
                 width: `${100}%`,
                 height: `${100}%`,
                 minWidth: `${viewBox.width}`,
