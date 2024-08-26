@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useRef } from 'react'
 import SearchIcon from '../../assets/HomePageIcons/Search.svg'
 import DownloadIcon from '../../assets/HomePageIcons/DownloadIcon.svg'
 import CaretDown from '../../assets/HomePageIcons/CaretDown.svg'
@@ -7,7 +7,6 @@ import AddIcon from '../../assets/HomePageIcons/AddIcon.svg'
 import JSON from '../../jsonFiles/SLDListing.json'
 import Inverter from '../../../public/inverter.svg'
 import SortIcon from '../../assets/HomePageIcons/SortIcons.svg'
-
 import './SLDListingTable.css'
 import CreateSLDModal from '../CreateSLDModal/CreateSLDModal'
 
@@ -24,6 +23,7 @@ interface Listing {
 const SLDListingTable = () => {
     const [isModalOpen, setisModalOpen] = useState(false);
     const [searchValue, setSearchValue] = useState(String);
+    const SearchInputRef = useRef<HTMLInputElement>();
     const [listings, setlistings] = useState<Listing[]>(JSON)
 
     const openModal = () => {
@@ -44,10 +44,11 @@ const SLDListingTable = () => {
                 <div className="searchAndDelete">
                     <div className="searchDiv">
                         <input placeholder="Search"
-                            id="searchval"
+                        ref={SearchInputRef}
+                        id="searchval"
                              />
                         <img src={SearchIcon} alt="search"
-                        onClick={() => setSearchValue(document.getElementById("searchval")?.value)}
+                        onClick={() => setSearchValue(SearchInputRef.current?.value)}
                         />
                     </div>
                     <div className="downloadDiv">
@@ -84,6 +85,7 @@ const SLDListingTable = () => {
                                 .map((listing) => {
                                     if (listing.sldName.toLowerCase().includes(searchValue.toLowerCase()))
                                         return (<tr key={listing.sldId}>
+                    
                                             <td><input type="checkbox" name="" id="" /></td>
                                             <td>
                                                 <div className='name'>
