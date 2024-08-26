@@ -12,7 +12,6 @@ const Connector:FC<connectorProps> = ({x,y,id,x1,y1})=> {
   return (
     <g
     id={`connector${id}`}
-    onMouseDown={(e)=>{e.preventDefault(); e.stopPropagation()}}
     strokeWidth={2}
     >
       

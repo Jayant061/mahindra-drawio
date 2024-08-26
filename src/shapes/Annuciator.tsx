@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState, } from 'react';
+import { FC, useRef, } from 'react';
 
 interface AnnuciatorProps {
   x: number;
@@ -11,11 +11,6 @@ const Annuciator: FC<AnnuciatorProps> = ({ x, y, id, }) => {
   const width = 100;
   const height = width / 2;
 
-
-  useEffect(()=>{
-     console.log(elementRef.current?.getBBox())
-  }, [elementRef.current?.getBBox().height, elementRef.current?.getBBox().width])
-
   return (
     <g
       ref={elementRef}
@@ -23,13 +18,12 @@ const Annuciator: FC<AnnuciatorProps> = ({ x, y, id, }) => {
       stroke="green"
       strokeWidth="0.5"
       id={`Annuciator${id}`}
-      onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}
     >
-      <rect width={width} height={height} x={x} y={y} id={`InverterReactangle1`} />
+      <rect width={width} height={height} x={x-width} y={y-height/2} id={`InverterReactangle1`} />
       <text
         id={`InvertedText1`}
-        x={x + 0.5 * width}
-        y={y + 0.55 * height}
+        x={x - 0.5 * width}
+        y={y}
         width={width - 2}
         fontFamily='sans-serif'
         stroke='none'
