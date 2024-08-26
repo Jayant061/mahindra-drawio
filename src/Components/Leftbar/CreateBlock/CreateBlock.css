@@ -39,19 +39,62 @@
                 font-size: 1rem;
                 padding: 0.5rem;
                 outline: none;
-                border: 2px solid var(--borderColor);
+                border: 1px solid #E5E5E5;
                 border-radius: 0.25rem;
+                option{
+                    padding: 0.5rem;
+                }
             }
+        }
+        span{
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--showBlockOrComponentTextColor);
         }
     }
     .blockDetails{
         display: flex;
+        padding: 0;
         p#emptyBlock{
             padding: 5rem;
             margin: auto;
             font-weight: 200;
             font-size: 0.8rem;
-            color: #3A3A3A80;
+            color:#C9D2CB;
+        }
+        table.addBlockTable{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            border-collapse: collapse;
+
+            thead,tbody{ 
+                width: 100%;  
+                tr{
+                    width: 100%;
+                    display: flex;
+                    border-bottom: 1px solid var(--borderColor);
+                    th,td{
+                        flex: 1;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        padding-left: 4px;
+                       &:nth-child(2){
+                        border-right: 2px solid var(--borderColor);
+                        border-left: 2px solid var(--borderColor);
+                       }
+                    }
+                    td{
+                        tr{
+                            &:last-child{
+                                border: none;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     .btn{

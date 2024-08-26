@@ -1,36 +1,72 @@
-[
-    {
-        "id":"001",
-        "x":50,
-        "y":20,
-        "elements":[
-            {
-                "id":"101",
-                "type":"Annuciator",
-                "connectedTo":["201","202"]
-            },
-            {
-              "id":"102",
-                "type":"Annuciator",
-                "connectedTo":["201","202"]  
-            }
-        ]
-    },
-    {
-        "id":"002",
-        "x":100,
-        "y":20,
-        "elements":[
-            {
-                "id":"101",
-                "type":"Relay",
-                "connectedTo":["101","202"]
-            },
-            {
-              "id":"102",
-                "type":"Inverter",
-                "connectedTo":["201","202"]
-            }
-        ]
-    }
-]
+[{
+    "blockId":"Block 202",
+    "elements":[
+        {"assetId":"001","name":"Transformer","Parameters":["a","b","c"]},
+        {"assetId":"002","name":"Relay","Parameters":["a","c"]},
+        {"assetId":"003","name":"Inverter","Parameters":["a","b","c"]},
+        {"assetId":"004","name":"Annuciator","Parameters":["a","b","c"]},
+        {"assetId":"005","name":"Breaker","Parameters":["b","c"]},
+        {"assetId":"006","name":"EnergyMeter","Parameters":["a","b","c"]},
+        {"assetId":"007","name":"Floater","Parameters":["a","b","c"]}
+    ]
+},
+{
+    "blockId":"Block 201",
+    "elements":[
+        {"assetId":"001","name":"Transformer","Parameters":["a","b","c"]},
+        {"assetId":"002","name":"Relay","Parameters":["a","b","c"]},
+        {"assetId":"003","name":"Inverter","Parameters":["a","b","c"]},
+        {"assetId":"004","name":"Annuciator","Parameters":["a","b","c"]},
+        {"assetId":"005","name":"Breaker","Parameters":["a","b","c"]},
+        {"assetId":"006","name":"EnergyMeter","Parameters":["a","b","c"]},
+        {"assetId":"007","name":"Floater","Parameters":["a","b","c"]}
+    ]
+},
+{
+    "blockId":"Block 203",
+    "elements":[
+        {"assetId":"001","name":"Transformer","Parameters":["a","b","c"]},
+        {"assetId":"002","name":"Relay","Parameters":["a","b","c"]},
+        {"assetId":"003","name":"Inverter","Parameters":["a","b","c"]},
+        {"assetId":"004","name":"Annuciator","Parameters":["a","b","c"]},
+        {"assetId":"005","name":"Breaker","Parameters":["a","b","c"]},
+        {"assetId":"006","name":"EnergyMeter","Parameters":["a","b","c"]},
+        {"assetId":"007","name":"Floater","Parameters":["a","b","c"]}
+    ]
+},
+{
+    "blockId":"Block 204",
+    "elements":[
+        {"assetId":"001","name":"Transformer","Parameters":["a","b","c"]},
+        {"assetId":"002","name":"Relay","Parameters":["a","b","c"]},
+        {"assetId":"003","name":"Inverter","Parameters":["a","b","c"]},
+        {"assetId":"004","name":"Annuciator","Parameters":["a","b","c"]},
+        {"assetId":"005","name":"Breaker","Parameters":["a","b","c"]},
+        {"assetId":"006","name":"EnergyMeter","Parameters":["a","b","c"]},
+        {"assetId":"007","name":"Floater","Parameters":["a","b","c"]}
+    ]
+},
+{
+    "blockId":"Block 205",
+    "elements":[
+        {"assetId":"001","name":"Transformer","Parameters":["a","b","c"]},
+        {"assetId":"002","name":"Relay","Parameters":["a","b","c"]},
+        {"assetId":"003","name":"Inverter","Parameters":["a","b","c"]},
+        {"assetId":"004","name":"Annuciator","Parameters":["a","b","c"]},
+        {"assetId":"005","name":"Breaker","Parameters":["a","b","c"]},
+        {"assetId":"006","name":"EnergyMeter","Parameters":["a","b","c"]},
+        {"assetId":"007","name":"Floater","Parameters":["a","b","c"]}
+    ]
+},
+{
+    "blockId":"Block 206",
+    "elements":[
+        {"assetId":"001","name":"Transformer","Parameters":["a","b","c"]},
+        {"assetId":"002","name":"Relay","Parameters":["a","b","c"]},
+        {"assetId":"003","name":"Inverter","Parameters":["a","b","c"]},
+        {"assetId":"004","name":"Annuciator","Parameters":["a","b","c"]},
+        {"assetId":"005","name":"Breaker","Parameters":["a","b","c"]},
+        {"assetId":"006","name":"EnergyMeter","Parameters":["a","b","c"]},
+        {"assetId":"007","name":"Floater","Parameters":["a","b","c"]}
+    ]
+}]

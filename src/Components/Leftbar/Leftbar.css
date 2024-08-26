@@ -42,7 +42,7 @@ div.leftbarContainer{
         top: 5rem;
         left: calc(100% + 0.75rem);
         text-align: start;
-        border-radius: 0.5rem;
+        border-radius: 0.25rem;
         border: 1px solid #112F3A1F;
         background-color: #fff;
         box-shadow: 5px 5px 5px #7070702a;

@@ -8,7 +8,6 @@ import Block from "../../Components/Block/Block.tsx";
 
 import SLDData from "../../jsonFiles/shapes3.json";
 import { Plant } from "../../models/Shape.ts";
-// import Lines from "../../Components/Lines/Lines.tsx";
 import StepLine from "../../Components/Lines/StepLine.tsx";
 
 

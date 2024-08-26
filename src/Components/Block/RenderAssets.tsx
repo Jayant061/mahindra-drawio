@@ -7,6 +7,7 @@ import Transformer from "../../shapes/Transformer";
 import Relay from "../../shapes/Relay";
 import Connector from "../../shapes/Connector";
 import React from "react";
+import Floater from "../../shapes/Floater";
 
 export const renderShapes = (elements:Assets[],rect:DOMRect|undefined,elementStartX:number,mainLineDistance:number) => {
     const radius = 20;
@@ -113,6 +114,17 @@ export const renderShapes = (elements:Assets[],rect:DOMRect|undefined,elementSta
                 x1={elementStartX}
                 y1={distanceFromTop}
                 x={elementStartX + mainLineDistance}
+                y={distanceFromTop}
+              />
+              {distanceFromTop +=(index  !==  elementCount-1)?(gap+2*radius):0}
+            </React.Fragment>
+          );
+          case "Floater":
+          return (
+            <React.Fragment key={element.id}>
+              <Floater
+                id={element.id}
+                x={elementStartX}
                 y={distanceFromTop}
               />
               {distanceFromTop +=(index  !==  elementCount-1)?(gap+2*radius):0}
