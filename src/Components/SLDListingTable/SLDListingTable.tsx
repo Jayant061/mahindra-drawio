@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SearchIcon from '../../assets/HomePageIcons/Search.svg'
 import DownloadIcon from '../../assets/HomePageIcons/DownloadIcon.svg'
 import CaretDown from '../../assets/HomePageIcons/CaretDown.svg'
@@ -83,7 +83,7 @@ const SLDListingTable = () => {
                             listings
                                 .map((listing) => {
                                     if (listing.sldName.toLowerCase().includes(searchValue.toLowerCase()))
-                                        return (<tr>
+                                        return (<tr key={listing.sldId}>
                                             <td><input type="checkbox" name="" id="" /></td>
                                             <td>
                                                 <div className='name'>
