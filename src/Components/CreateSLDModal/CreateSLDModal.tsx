@@ -1,14 +1,21 @@
 import React, { FC } from 'react';
 import CloseBtnIcon from '../../assets/HomePageIcons/CloseBtn.svg';
+import { useNavigate } from 'react-router-dom';
+
 import './CreateSLDModal.css';
 
 interface ModalProps {
     modalOpen: boolean;
-    onClose: () => void; // Add an onClose prop to handle closing the modal
+    onClose: () => void;
 }
 
 const CreateSLDModal: FC<ModalProps> = ({ modalOpen, onClose }): JSX.Element => {
-    if (!modalOpen) return null; // Return null if modal is not open
+    if (!modalOpen) return null;
+    const navigate = useNavigate();
+
+    const NavigateToPlayground = () => {
+        navigate("/playground");
+    }
 
     return (
         <div className="modal-Background">
@@ -18,8 +25,8 @@ const CreateSLDModal: FC<ModalProps> = ({ modalOpen, onClose }): JSX.Element => 
                     <img
                         src={CloseBtnIcon}
                         alt="Close"
-                        onClick={onClose} // Use onClose prop to handle close action
-                        style={{ cursor: 'pointer' }} // Add pointer cursor for better UX
+                        onClick={onClose}
+                        style={{ cursor: 'pointer' }}
                     />
                 </div>
                 <div className="nameInput">
@@ -51,7 +58,7 @@ const CreateSLDModal: FC<ModalProps> = ({ modalOpen, onClose }): JSX.Element => 
                     </select>
                 </div>
                 <div className="createBtn">
-                    <button>Create</button>
+                    <button onClick={NavigateToPlayground}>Create</button>
                 </div>
             </div>
         </div>

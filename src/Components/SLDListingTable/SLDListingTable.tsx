@@ -174,7 +174,9 @@ const SLDListingTable = () => {
                                     <td>
                                         <div className='name'>
                                             <img src={Inverter} alt="inverter" />
+                                            <p>
                                             {listing.sldName}
+                                            </p>
                                         </div>
                                     </td>
                                     <td>{listing.powerPlantId}</td>
