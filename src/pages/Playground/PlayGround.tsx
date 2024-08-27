@@ -12,6 +12,26 @@ import StepLine from "../../Components/Lines/StepLine.tsx";
 
 const PlayGround = () => {
   const [shapes, setShapes] = useState<Plant>(SLDData);
+  // const [shapes, setShapes] = useState<Plant>(
+  //   {
+  //     "id": "ksdf",
+  //     "name": "Sld001",
+  //     "type": "plant",
+  //     blocks: [
+  //       {
+  //         "id": "asdf",
+  //         "name": "Block1",
+  //         "type": "plant",
+  //         "x" : 200,
+  //         "y": 300, 
+  //         "elements" : []
+  //       }
+  //     ]
+  //   }
+  // );
+
+
+  
   const [childCoord, setChildCoord] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
@@ -20,8 +40,7 @@ const PlayGround = () => {
   const svgParentRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const [viewBox, setViewBox] = useState({ x: 0, y: 0, width: 0, height: 0 });
-  const [isBlockDragging,setIsBlockDragging] = useState<boolean>(true)
-  // const [verticalLineCoords,setVerticalLineCoords] = useState({maxX:0,minY:0,maxY:0});
+  const [isBlockDragging, setIsBlockDragging] = useState<boolean>(true)
 
   const [fixedScale, setfixedScale] = useState(1);
 
@@ -43,19 +62,19 @@ const PlayGround = () => {
     const point = new DOMPoint(e.clientX, e.clientY);
     const svgPoint = point.matrixTransform(svg.getScreenCTM()!.inverse());
     // Convert the screen coordinates to SVG coordinates
-    if(!isBlockDragging)return;
-    setChildCoord(prevCoord=>{
-      if(Math.abs(prevCoord.x-svgPoint.x)>5 ||Math.abs(prevCoord.y-svgPoint.y)>5){
+    if (!isBlockDragging) return;
+    setChildCoord(prevCoord => {
+      if (Math.abs(prevCoord.x - svgPoint.x) > 5 || Math.abs(prevCoord.y - svgPoint.y) > 5) {
         return { x: svgPoint.x, y: svgPoint.y }
       }
-      else{
+      else {
         return prevCoord
       }
-      
+
     });
   };
 
-  const handleMouseLeave: MouseEventHandler<SVGSVGElement> = () => {setIsBlockDragging(false)};
+  const handleMouseLeave: MouseEventHandler<SVGSVGElement> = () => { setIsBlockDragging(false) };
 
   useEffect(() => {
     const padding = 50;
@@ -94,15 +113,16 @@ const PlayGround = () => {
     }
   };
 
-  const blocks = shapes.blocks.map((block, index) => {
-  const mainLineDistance = 200
+  const blocks = shapes?.blocks.map((block, index) => {
+    const mainLineDistance = 200
     return (
       <React.Fragment key={block.id}>
-    {index<shapes.blocks.length-1 && <StepLine key={index+"blockLine"} x1={block.x+mainLineDistance+120} y1={block.y} x2={shapes.blocks[index+1].x+mainLineDistance+120} y2={shapes.blocks[index+1].y}/>}
-      <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} setIsBlockDrag={setIsBlockDragging} elementStartX={120} isMouseLeave={!isBlockDragging} />
+        {index < shapes.blocks.length - 1 && <StepLine key={index + "blockLine"} x1={block.x + mainLineDistance + 120} y1={block.y} x2={shapes.blocks[index + 1].x + mainLineDistance + 120} y2={shapes.blocks[index + 1].y} />}
+        <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} setIsBlockDrag={setIsBlockDragging} elementStartX={120} isMouseLeave={!isBlockDragging} />
       </React.Fragment>
     );
   });
+
   return (
     <>
       <div className="playground">
@@ -127,16 +147,15 @@ const PlayGround = () => {
               onMouseLeave={handleMouseLeave}
               style={{
                 transform: `scale(${zoomLevel}`,
-                transformOrigin: `center`,
+                transformOrigin: `top left`,
                 width: `${100}%`,
                 height: `${100}%`,
                 minWidth: `${viewBox.width}`,
                 minHeight: `${viewBox.height}`,
 
                 backgroundImage: `conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)`,
-                backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${
-                  zoomLevel * 10
-                }px ${zoomLevel * 10}px`,
+                backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10
+                  }px ${zoomLevel * 10}px`,
               }}
             >
               {blocks}
