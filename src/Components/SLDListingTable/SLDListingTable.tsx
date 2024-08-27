@@ -5,7 +5,7 @@ import CaretDown from '../../assets/HomePageIcons/CaretDown.svg'
 import DeleteIcon from '../../assets/HomePageIcons/DeleteIcon.svg'
 import AddIcon from '../../assets/HomePageIcons/AddIcon.svg'
 import JSON from '../../jsonFiles/SLDListing.json'
-import Inverter from '../../../public/inverter.svg'
+import Inverter from '/inverter.svg'
 import SortIcon from '../../assets/HomePageIcons/SortIcons.svg'
 import './SLDListingTable.css'
 import CreateSLDModal from '../CreateSLDModal/CreateSLDModal'
@@ -48,7 +48,7 @@ const SLDListingTable = () => {
                         id="searchval"
                              />
                         <img src={SearchIcon} alt="search"
-                        onClick={() => setSearchValue(SearchInputRef.current?.value)}
+                        onClick={() => setSearchValue(SearchInputRef.current!.value)}
                         />
                     </div>
                     <div className="downloadDiv">

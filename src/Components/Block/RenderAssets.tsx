@@ -127,7 +127,7 @@ export const renderShapes = (elements:Assets[],rect:DOMRect|undefined,elementSta
                 x={elementStartX}
                 y={distanceFromTop}
               />
-              {distanceFromTop +=(index  !==  elementCount-1)?(gap+2*radius):0}
+              {distanceFromTop +=(index  !==  elementCount-1)?rectLength:0}
             </React.Fragment>
           );
         default:
