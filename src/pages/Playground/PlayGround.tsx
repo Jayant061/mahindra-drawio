@@ -5,7 +5,6 @@ import Menu from "../../Components/Menu/Menu.tsx";
 import "./Playground.css";
 import d3ToPng from "d3-svg-to-png";
 import Block from "../../Components/Block/Block.tsx";
-
 import SLDData from "../../jsonFiles/shapes3.json";
 import { Plant } from "../../models/Shape.ts";
 import StepLine from "../../Components/Lines/StepLine.tsx";
@@ -29,7 +28,6 @@ const PlayGround = () => {
   const handleZoomIn = () => {
     setfixedScale((prevfixedScale) => prevfixedScale / 1.2);
     setZoomLevel((prevZoomLevel) => prevZoomLevel * 1.2);
-    console.log(zoomLevel, fixedScale);
   };
 
   const handleZoomOut = () => {
@@ -75,7 +73,6 @@ const PlayGround = () => {
 
   //Downloading Image
   const captureSVG = async () => {
-    console.log(fixedScale);
     try {
       const svgSelector = "svg";
       const fileName = "canvas_image";
@@ -97,18 +94,8 @@ const PlayGround = () => {
     }
   };
 
-  // const blocks = shapes.map((shape, index) => {
-  //   return (
-  //     <Block
-  //       key={index}
-  //       id={index}
-  //       childCoord={childCoord}
-  //       shapes={shape}
-  //     />
-  //   );
-  // });
   const blocks = shapes.blocks.map((block, index) => {
-    const mainLineDistance = 200
+  const mainLineDistance = 200
     return (
       <React.Fragment key={block.id}>
     {index<shapes.blocks.length-1 && <StepLine key={index+"blockLine"} x1={block.x+mainLineDistance+120} y1={block.y} x2={shapes.blocks[index+1].x+mainLineDistance+120} y2={shapes.blocks[index+1].y}/>}
@@ -139,7 +126,7 @@ const PlayGround = () => {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               style={{
-                transform: `scale(${zoomLevel})`,
+                transform: `scale(${zoomLevel}`,
                 transformOrigin: `center`,
                 width: `${100}%`,
                 height: `${100}%`,

@@ -5,12 +5,11 @@
     align-items: center;
     justify-content: center;
     background-color: #323232CC;
-    height: 100%;
+    height: 90.5%;
     width: 100%;
     .dailogBox {
         top: 50%;
         left: 50%;
-        /* transform: translate(-50%, -50%); */
         background-color: white;
         padding: 2rem 3rem;
         border-radius: 5px;

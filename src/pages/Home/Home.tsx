@@ -8,9 +8,9 @@ const Home = () => {
   return (
     <>
       <div className="homecontainer">
-        <div className="sidebar">
+        {/* <div className="sidebar">
           <Sidebar />
-        </div>
+        </div> */}
         <div className="main-area">
           <MainArea />
         </div>
