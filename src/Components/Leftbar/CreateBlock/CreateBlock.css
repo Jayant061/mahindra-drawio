@@ -1,0 +1,135 @@
+:root{
+    --showBlockOrComponentTextColor:#254C5A;
+    --borderColor:#E5E5E5;
+}
+.createBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    min-width:600px ;
+    .blockSubsection{
+        padding:1rem;
+        border-bottom: 2px solid lightgray;
+    }
+    .blockHeading{
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        color: var(--showBlockOrComponentTextColor);
+        display: flex;
+        justify-content: space-between;
+    }
+    .bockInput{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+        .selectBlock{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            label{
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--showBlockOrComponentTextColor);
+            }
+            select{
+                flex: 1;
+                font-size: 1rem;
+                padding: 0.5rem;
+                outline: none;
+                border: 1px solid #E5E5E5;
+                border-radius: 0.25rem;
+                option{
+                    padding:1rem;
+            
+                    color:#707070;
+                }
+                /* option[disabled]{
+                    color:lightgray;
+                } */
+            }
+            
+        }
+        span{
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--showBlockOrComponentTextColor);
+        }
+    }
+    .blockDetails{
+        display: flex;
+        padding: 0;
+        p#emptyBlock{
+            padding: 5rem;
+            margin: auto;
+            font-weight: 200;
+            font-size: 0.8rem;
+            color:#C9D2CB;
+        }
+        table.addBlockTable{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            border-collapse: collapse;
+            tbody{
+                tr{
+                    &:last-child{
+                        border: none;
+                    }
+                }
+            }
+            thead,tbody{ 
+                width: 100%;  
+                tr{
+                    width: 100%;
+                    display: flex;
+                    border-bottom: 1px solid var(--borderColor);
+                    th,td{
+                        flex: 1;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        padding: 0 1rem ;
+                       &:nth-child(2){
+                        border-right: 1px solid var(--borderColor);
+                        border-left: 1px solid var(--borderColor);
+                       }
+                    }
+                    td{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        position: relative;
+                        section.selectParameters{
+                            position: absolute;
+                            width: calc(100% - 2rem);
+                            top: 60%;
+                            left: 1rem;
+                            background-color: white;
+                            border: 1px solid var(--borderColor);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .btn{
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+        button{
+            width: 5rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            background-color: #70707033;
+            color: #707070;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+
+}

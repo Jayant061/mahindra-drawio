@@ -1,0 +1,12 @@
+.homecontainer{
+    display: flex;
+    font-family: "Roboto Serif", serif;
+    height: 100%;
+    width: 100%;
+    .main-area{
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+ 

@@ -1,0 +1,87 @@
+:root{
+    --showComponentOrComponentTextColor:#254C5A;
+    --borderColor:#E5E5E5;
+}
+.createComponent{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    min-width:600px ;
+    .componentSubsection{
+        padding:1em;
+        border-bottom: 2px solid lightgray;
+    }
+    .componentHeading{
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        color: var(--showComponentOrComponentTextColor);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .componentInput{
+        width: 100%;
+        padding: 0;
+        .selectComponent{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .heading{
+                padding: 1em 0.5em 0.3em 0.5em;
+            }
+        }
+        .componentTable{
+            width: 100%;
+            table{
+                width: 100%;
+                border-collapse: collapse;
+                thead{
+                    tr{
+                        th{
+                            border: 1px solid var(--borderColor);
+                            .theading{
+                                padding: 0.7em;
+                                text-align: left;
+                            }
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        td{
+                            border: 1px solid var(--borderColor);
+                            padding: 1rem;
+
+                            .manualSelect{
+                                display: flex;
+                                justify-content: space-between;
+                                text-wrap: nowrap;
+                                p{
+                                    color: #C9D2CB;
+                                }
+                            }
+
+                            .searchDd{
+                                position: absolute;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .addBtn{
+        display: flex;
+        padding: 1em;
+        justify-content: flex-end;
+        button{
+            padding: 1em;
+            border: none;
+            border-radius: 3px;
+            background-color: #70707033;
+            font-weight: 600;
+            color: #323232;
+        }
+    }
+}
