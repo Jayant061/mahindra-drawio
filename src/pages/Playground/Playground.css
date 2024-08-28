@@ -38,10 +38,16 @@ body {
       z-index: 2;
     }
 
+    .rightbar{
+      width : 20%;
+      height: 100%;
+    }
+
 
     .svg {
       z-index: 1;
-      width: 82%;
+      /* width: 62%; */
+      flex: 1 1 1;
       height: 100%;
       display: flex;
       position: relative;
@@ -52,7 +58,7 @@ body {
         conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0); */
       .menu {
         position: fixed;
-        right: 2rem;
+        right: calc(20% + 2rem);
         top: 6rem;
         display: flex;
         flex-direction: row-reverse;

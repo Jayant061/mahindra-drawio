@@ -5,16 +5,16 @@ export interface Shape {
     radius?: number|undefined;
     id:string
   }
-  export interface Plant {
-    id: string;
-    name: string;
-    type: string;
+  export interface SLD {
+    sldId: string;
+    sldName: string;
+    plantId: string;
+    plantName: string;
     blocks: Blocks[];
   }
    
   export interface Blocks {
     id: string;
-    type: string;
     name: string;
     x: number;
     y: number;
@@ -23,13 +23,20 @@ export interface Shape {
    
   export interface Assets {
     id: string;
-    type:string,
     name: string;
+    x? : number;
+    y?: number;
     status: string;
     connectedTo: ParentAssets[];
+    parameters : Parameters[];
   }
    
   export interface ParentAssets{
     id: string,
     connection_type: string
+  }
+
+  export interface Parameters{
+    key : string;
+    value : string;
   }

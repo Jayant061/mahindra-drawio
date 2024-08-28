@@ -6,12 +6,12 @@ import "./Playground.css";
 import d3ToPng from "d3-svg-to-png";
 import Block from "../../Components/Block/Block.tsx";
 import SLDData from "../../jsonFiles/shapes3.json";
-import { Plant } from "../../models/Shape.ts";
+import { SLD } from "../../models/Shape.ts";
 import StepLine from "../../Components/Lines/StepLine.tsx";
-
+import RightBar from "../../Components/RightBar/RightBar.tsx";
 
 const PlayGround = () => {
-  const [shapes, setShapes] = useState<Plant>(SLDData);
+  const [shapes, setShapes] = useState<SLD>(SLDData);
   // const [shapes, setShapes] = useState<Plant>(
   //   {
   //     "id": "ksdf",
@@ -137,9 +137,7 @@ const PlayGround = () => {
               <button onClick={handleZoomIn}>zIn</button>
               <button onClick={handleZoomOut}>ZOut</button>
             </div>
-            {/* <div                 className="SVG_Canvas"> */}
             <svg
-              // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
               key={"svg-1"}
               ref={svgRef}
               viewBox={`${0} ${0} ${viewBox.width} ${viewBox.height}`}
@@ -160,6 +158,9 @@ const PlayGround = () => {
             >
               {blocks}
             </svg>
+          </div>
+          <div className="rightbar">
+            <RightBar />
           </div>
         </div>
       </div>

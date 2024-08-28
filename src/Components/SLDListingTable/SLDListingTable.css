@@ -87,7 +87,7 @@
 }
 
 .SLDtable {
-    height: 80vh;
+    max-height: 80vh;
     overflow-y: auto;
     table {
         width: 100%;
@@ -118,6 +118,7 @@
                     padding: 0.8rem 1.5rem;
                     .name {
                         display: flex;
+                        width: 100%;
                         align-items: center;
                         justify-content: center;
                         gap: 1em;

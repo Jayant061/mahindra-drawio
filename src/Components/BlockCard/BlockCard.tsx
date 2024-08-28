@@ -15,7 +15,7 @@ interface BlockCardProps{
 }
 
 const BlockCard = ({name, elements}: BlockCardProps) => {
-    const [isExpanded, setIsExpanded] = useState<boolean>(true);
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
     const changeExpanded = () => {
         setIsExpanded(prev => !prev);
@@ -34,36 +34,17 @@ const BlockCard = ({name, elements}: BlockCardProps) => {
                     <img src={DeleteIcon} alt="" />
                 </div>
             </div>
-            <div className={isExpanded? "collapsed" : "ItemsList"}>
-                
+            <div className={isExpanded? "ItemsList" : "collapsed"}>
                 {elements.map((element) => {
                     return (<div className="listItem">
                         <div className="ItemName">
-                            <p>{element.name}</p>
+                            <p>{element.id} ({element.name})</p>
                         </div>
                         <div className="removeIcon">
                             <img src={Minus} alt="icon" />
                         </div>
                     </div>);
                 })}
-                
-
-                {/* <div className="listItem">
-                    <div className="ItemName">
-                        <p>ASDF</p>
-                    </div>
-                    <div className="removeIcon">
-                        <img src={Minus} alt="icon" />
-                    </div>
-                </div>
-                <div className="listItem">
-                    <div className="ItemName">
-                        <p>ASDF</p>
-                    </div>
-                    <div className="removeIcon">
-                        <img src={Minus} alt="icon" />
-                    </div>
-                </div> */}
             </div>
         </div>
     )

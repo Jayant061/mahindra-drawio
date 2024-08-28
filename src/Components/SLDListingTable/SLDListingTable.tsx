@@ -13,6 +13,7 @@ import PreviewIcon from '../../assets/HomePageIcons/PreviewIcon.svg';
 import EditIcon from '../../assets/HomePageIcons/EditIcon.svg';
 import ThreeDotsIcon from '../../assets/HomePageIcons/ThreeDots.svg'
 import CaretRight from '../../assets/HomePageIcons/CaretRight.svg'
+import Checkbox from '@mui/material/Checkbox';
 
 interface Listing {
     sldId: string;
@@ -61,19 +62,19 @@ const SLDListingTable = () => {
     }
 
     const selectAllRows = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             setSelectedRow(listings);
         }
-        else{
+        else {
             setSelectedRow([]);
         }
     }
 
     const selectOrDeselectARow = (e: React.ChangeEvent<HTMLInputElement>, listing: Listing) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             setSelectedRow([...selectedRows, listing])
         }
-        else{
+        else {
             setSelectedRow(selectedRows => selectedRows.filter((value) => value.sldId !== listing.sldId))
         }
     }
@@ -107,24 +108,24 @@ const SLDListingTable = () => {
                     </div>
                     {downloadDropDownState &&
                         <div className='downloadMenu'>
-                            <div className="option" onClick={() => {setDownloadDropDownState2(!downloadDropDownState2)}}>
+                            <div className="option" onClick={() => { setDownloadDropDownState2(!downloadDropDownState2) }}>
                                 <img src={DownloadIcon} alt="download-icon" />
                                 <p>Download</p>
-                                <img src={CaretRight} alt="caret"  />
+                                <img src={CaretRight} alt="caret" />
                             </div>
                             {downloadDropDownState2 && <div className='downloadMenu2'>
-                            <div className="option">
-                                <p>JPG</p>
-                            </div>
-                            <hr />
-                            <div className="option">
-                                <p>PNG</p>
-                            </div>
-                            <hr />
-                            <div className="option">
-                                <p>PDF</p>
-                            </div>
-                        </div>}
+                                <div className="option">
+                                    <p>JPG</p>
+                                </div>
+                                <hr />
+                                <div className="option">
+                                    <p>PNG</p>
+                                </div>
+                                <hr />
+                                <div className="option">
+                                    <p>PDF</p>
+                                </div>
+                            </div>}
                             <hr />
                             <div className="option" style={{ color: 'red' }}>
                                 <img src={DeleteIcon} alt="download-icon" />
@@ -141,7 +142,9 @@ const SLDListingTable = () => {
                 <table>
                     <thead>
                         <tr style={{ border: '1px solid green' }}>
-                            <th><input type="checkbox" checked={selectedRows.length === listings.length} onChange={selectAllRows}/></th>
+                            <th>
+                                <Checkbox color="success" sx={{ color: 'black' }} checked={selectedRows.length === listings.length} onChange={selectAllRows} />
+                            </th>
                             <th>
                                 <div className="title">
                                     Name
@@ -167,15 +170,16 @@ const SLDListingTable = () => {
                             )
                             .map(listing => (
                                 <tr key={listing.sldId}>
-                                    <td><input type="checkbox" 
-                                    checked={selectedRows.includes(listing)? true : false}
-                                    onChange={(e) => selectOrDeselectARow(e, listing)}
-                                    /></td>
+                                    <td>
+                                        <Checkbox color="success" sx={{ color: 'black' }} checked={selectedRows.includes(listing) ? true : false}
+                                            onChange={(e) => selectOrDeselectARow(e, listing)} />
+
+                                    </td>
                                     <td>
                                         <div className='name'>
                                             <img src={Inverter} alt="inverter" />
                                             <p>
-                                            {listing.sldName}
+                                                {listing.sldName}
                                             </p>
                                         </div>
                                     </td>
