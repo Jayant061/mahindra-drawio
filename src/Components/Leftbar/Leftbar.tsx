@@ -3,7 +3,7 @@ import "./Leftbar.css"
 import plusIcon from "../../assets/plus.png"
 import CreateBlock from './CreateBlock/CreateBlock'
 import CreateComponent from './CreateComponent/CreateComponent'
-import BlockCard from '../BlockCard/BlockCard'
+import BlockCard from './BlockCard/BlockCard'
 
 import json from '../../jsonFiles/shapes3.json'
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import DownIcon from '../../assets/MainPageIcons/CaretDown.svg'
-import EditIcon from '../../assets/MainPageIcons/EditIcon.svg'
-import CopyIcons from '../../assets/MainPageIcons/CopyIcons.svg'
-import DeleteIcon from '../../assets/MainPageIcons/DeleteIcon.svg'
-import Minus from '../../assets/MainPageIcons/MinusCircle.svg'
-import {Assets, Plant} from '../../models/Shape'
+import DownIcon from '../../../assets/HomePageIcons/CaretDown.svg'
+import EditIcon from '../../../assets/HomePageIcons/EditIcon.svg'
+import CopyIcons from '../../../assets/MainPageIcons/CopyIcons.svg'
+import DeleteIcon from '../../../assets/MainPageIcons/DeleteIcon.svg'
+import Minus from '../../../assets/MainPageIcons/MinusCircle.svg'
+import {Assets, SLD} from '../../../models/Shape'
 
 import './BlockCard.css'
 

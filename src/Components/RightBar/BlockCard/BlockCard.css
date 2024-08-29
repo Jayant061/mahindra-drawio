@@ -1,0 +1,72 @@
+.blockCardDiv {
+    width: 90%;
+    border: 1px solid #70707014;
+    border-radius: 0.5em;
+    box-shadow: 0px 4px 8px 0px #70707033;
+    background-color: #7070700A;
+    color: #254C5A;
+
+    .componentName {
+        padding: 0.5em 1em 0.5em 0.5em;
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+
+        /* .buttonDiv{
+            :hover{
+                background-color: gray;
+                border-radius: 50%;
+                height: 0.9rem;
+                width: 0.9rem;
+            }
+        } */
+
+        .toggleBtn{
+            transform: rotate(180deg);
+            transition: 0.1s ease-out;
+            /* :hover{
+                background-color: gray;
+                border-radius: 50%;
+                height: 0.9rem;
+                width: 0.9rem;
+            } */
+        }
+    }
+
+    .blockName {
+        width: 100%;
+        padding: 0.5em;
+        background-color: #7070700D;
+    }
+
+    .hidestatusList{
+        height: 0;
+        overflow: hidden;
+    }
+
+
+    .showstatusList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.2em;
+        background-color: #7070700A;
+        .status {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            width: 90%;
+            padding: 0.1em 0.3em;
+            border: 1px solid #70707014;
+            /* .dot {
+                height: 1rem;
+                width: 1rem;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                border: 2px solid #707070CC;
+              } */
+        }
+    }
+}

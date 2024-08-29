@@ -3,6 +3,10 @@ import SearchIcon from '../../assets/HomePageIcons/Search.svg'
 
 import './RightBar.css'
 
+import json from '../../jsonFiles/shapes3.json'
+import BlockCard from './BlockCard/BlockCard'
+
+
 const RightBar = () => {
   const [isParamterNav, setIsParameterNav] = useState<boolean>(true);
   return (
@@ -19,6 +23,7 @@ const RightBar = () => {
           <p>Notification</p>
         </div>
       </div>
+      <hr />
       <div className="navDiv">
         {
           isParamterNav &&
@@ -60,7 +65,15 @@ const RightBar = () => {
               </select>
             </div>
             <div className="assetList">
-              
+              {json.blocks.map((block) => {
+                return <>
+                {
+                  block.elements.map((element) => {
+                    return <BlockCard name={block.name} element={element}/>
+                  })
+                }
+                </>
+              })}
             </div>
           </div>
         }
