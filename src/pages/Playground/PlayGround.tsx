@@ -39,7 +39,7 @@ const PlayGround = () => {
   const [zoomLevel, setZoomLevel] = useState(1);
   const svgParentRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const [viewBox, setViewBox] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [viewBox, setViewBox] = useState<{ x: number, y: number, width: number, height: number }>({ x: 0, y: 0, width: 0, height: 0 });
   const [isBlockDragging, setIsBlockDragging] = useState<boolean>(true)
 
   const [fixedScale, setfixedScale] = useState(1);
@@ -56,38 +56,41 @@ const PlayGround = () => {
 
   const handleMouseMove: MouseEventHandler<SVGSVGElement> = (e) => {
     const svg = e.currentTarget;
-    // const point = svg.createSVGPoint();
-    // point.x = e.clientX;
-    // point.y = e.clientY;
-    const point = new DOMPoint(e.clientX, e.clientY);
-    const svgPoint = point.matrixTransform(svg.getScreenCTM()!.inverse());
-    // Convert the screen coordinates to SVG coordinates
+    const point = svg.createSVGPoint();
+    point.x = e.clientX;
+    point.y = e.clientY;
+    const svgPoint = point.matrixTransform(svg.getScreenCTM()?.inverse());
     if (!isBlockDragging) return;
     setChildCoord(prevCoord => {
       if (Math.abs(prevCoord.x - svgPoint.x) > 5 || Math.abs(prevCoord.y - svgPoint.y) > 5) {
-        return { x: svgPoint.x, y: svgPoint.y }
+        return {x:svgPoint.x,y:svgPoint.y}
       }
       else {
-        return prevCoord
+        return prevCoord;
       }
-
-    });
-  };
+  })
+}
 
   const handleMouseLeave: MouseEventHandler<SVGSVGElement> = () => { setIsBlockDragging(false) };
-
+const handleMouseUp:MouseEventHandler<SVGSVGElement> = ()=>{
+  const svgRect = svgRef.current?.getBBox();
+  if(!svgRect)return;
+  setViewBox({x:svgRect.x,y:svgRect.y,width:svgRect.width,height:svgRect.height})
+}
+  const svgRenderingCount = useRef<number>(0)
   useEffect(() => {
-    const padding = 50;
+    const padding = 20;
+    // const padding = 50;
     const svgRect = svgRef.current?.getBBox();
-    // const svgEl = svgRef.current?.ownerSVGElement;
+    console.log(svgRect)
     if (!svgRect) return;
-
-    setViewBox({
-      x: svgRect.x,
-      y: svgRect.y,
-      width: svgRect.width + svgRect.x + padding,
-      height: svgRect.height + svgRect.y + padding,
-    });
+    if(svgRect.height)svgRenderingCount.current++;
+    svgRenderingCount.current===1?setViewBox({x:svgRect.x-padding,y:svgRect.y-padding,width:svgRect.width,height:svgRect.height}):
+    setViewBox(prev=>{return {
+      ...prev,
+      width: svgRect.width + padding,
+      height: svgRect.height + padding,
+    }});
   }, [svgRef.current?.getBBox().width, svgRef.current?.getBBox().height]);
 
   //Downloading Image
@@ -118,11 +121,10 @@ const PlayGround = () => {
     return (
       <React.Fragment key={block.id}>
         {index < shapes.blocks.length - 1 && <StepLine key={index + "blockLine"} x1={block.x + mainLineDistance + 120} y1={block.y} x2={shapes.blocks[index + 1].x + mainLineDistance + 120} y2={shapes.blocks[index + 1].y} />}
-        <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} setIsBlockDrag={setIsBlockDragging} elementStartX={120} isMouseLeave={!isBlockDragging} />
+        <Block key={index} id={block.id} childCoord={childCoord} block={block} mainLineDistance={mainLineDistance} setShape={setShapes} setIsBlockDrag={setIsBlockDragging} elementStartX={120} isMouseLeave={!isBlockDragging} zoomLevel={zoomLevel} />
       </React.Fragment>
     );
   });
-
   return (
     <>
       <div className="playground">
@@ -139,26 +141,28 @@ const PlayGround = () => {
             </div>
             {/* <div                 className="SVG_Canvas"> */}
             <svg
-              // onLoad={()=>{console.log(new Date().getTime() - startTime)}}
+              onLoad={()=>{console.log(svgRef.current?.getBBox())}}
               key={"svg-1"}
               ref={svgRef}
-              viewBox={`${0} ${0} ${viewBox.width} ${viewBox.height}`}
+              viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.width} ${viewBox.height}`}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
+              // onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
               style={{
-                transform: `scale(${zoomLevel})`,
-                transformOrigin: `top left`,
+                transformOrigin: `center`,
+                transform:`transform(${zoomLevel})`,
                 width: `${100}%`,
                 height: `${100}%`,
                 minWidth: `${viewBox.width}`,
                 minHeight: `${viewBox.height}`,
-
                 backgroundImage: `conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0),conic-gradient(at calc(100% - 1px) calc(100% - 1px), var(--line-color-1) 270deg, #0000 0)`,
                 backgroundSize: `${zoomLevel * 50}px ${zoomLevel * 50}px, ${zoomLevel * 10
                   }px ${zoomLevel * 10}px`,
               }}
-            >
-              {blocks}
+            >  
+              {blocks}        
+
             </svg>
           </div>
         </div>

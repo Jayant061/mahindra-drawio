@@ -45,9 +45,6 @@
             
                     color:#707070;
                 }
-                /* option[disabled]{
-                    color:lightgray;
-                } */
             }
             
         }
@@ -91,7 +88,7 @@
                         display: flex;
                         justify-content: start;
                         align-items: center;
-                        padding: 0 1rem ;
+                        padding: 0  0.5rem 0 1rem;
                        &:nth-child(2){
                         border-right: 1px solid var(--borderColor);
                         border-left: 1px solid var(--borderColor);
@@ -99,17 +96,46 @@
                     }
                     td{
                         display: flex;
-                        justify-content: space-between;
+                        justify-content: start;
+                        gap: 0.5rem;
                         align-items: center;
                         position: relative;
                         section.selectParameters{
                             position: absolute;
-                            width: calc(100% - 2rem);
-                            top: 60%;
-                            left: 1rem;
+                            z-index: 5;
+                            width: calc(100% - 1rem);
                             background-color: white;
                             border: 1px solid var(--borderColor);
+                            .searchBar{
+                                border: 1px solid var(--borderColor);
+                                display: flex;
+                                justify-content: start;
+                                align-items: center;
+                                padding: 0.5em;
+                                gap: 0.25em;
+                                input{
+                                    font-family: Mulish;
+                                    flex: 1;
+                                    width: 100%;
+                                    border: none;
+                                    outline: none;
+                                    font-size: 1rem;
+                                }
+                            }
+                            .options{
+                                .option{
+                                    padding-left: 0.5em;
+                                }
+                                .selectAll{
+                                    border-top: 1px solid var(--borderColor);
+                                    border-bottom: 1px solid var(--borderColor);
+                                }
+                            }
                         }
+                    }
+                    td.assetParameter{
+                        justify-content: space-between;
+                        img{transition: transform 0.2s ease-in}
                     }
                 }
             }

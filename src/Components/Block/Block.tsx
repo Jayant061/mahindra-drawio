@@ -12,12 +12,14 @@ interface blockProps {
   setIsBlockDrag:React.Dispatch<React.SetStateAction<boolean>>
   elementStartX:number;
   isMouseLeave:boolean;
+  zoomLevel:number;
 }
-function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX,setIsBlockDrag,isMouseLeave  }: blockProps) {
+function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX,setIsBlockDrag,isMouseLeave,zoomLevel }: blockProps) {
 
   const [blockRect, setBlockRect] = useState(<rect key={"emptyrect"+id} />);
   const isBlockDrag = useRef<boolean>(false);
   const [blockCoords, setBlockCoords] = useState({ x: 0, y: 0 });
+  // const [offset,setOffset] = useState({x:0,y:0});
   const [transform, setTransform] = useState({ x: block.x, y: block.y });
   const [prevTransform, setPrevTransform] = useState({ x: block.x, y: block.y });
   const svgGrpRef = useRef<SVGGElement>(null);
@@ -33,7 +35,12 @@ function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX,s
       return { ...prevShape, blocks: newBlocks };
     });
   }, [transform]);
+
   useEffect(()=>{
+    setBlockCoords({x:blockCoords.x*zoomLevel,y:blockCoords.y*zoomLevel})
+  },[zoomLevel])
+  useEffect(()=>{
+
     if(isMouseLeave){
       handleMouseUp();
     }
@@ -43,11 +50,14 @@ function Block({ block, id, childCoord,mainLineDistance,setShape,elementStartX,s
     isBlockDrag.current = true;
     setIsBlockDrag(true)
     const svg = e.currentTarget.ownerSVGElement!;
-    const point = new DOMPoint(e.clientX, e.clientY);
-
-    // Convert the screen coordinates to SVG coordinates
-    const svgPoint = point.matrixTransform(svg.getScreenCTM()!.inverse());
-    setBlockCoords({ x: svgPoint.x, y: svgPoint.y });
+    // const point = new DOMPoint(e.clientX, e.clientY);
+    // const svgPoint = point.matrixTransform(svg.getScreenCTM()!.inverse());
+    console.log(svg)
+    const point = svg.createSVGPoint();
+    point.x = e.clientX;
+    point.y = e.clientY;
+    const svgPoint = point.matrixTransform(svg.getScreenCTM()?.inverse());
+    setBlockCoords({ x: (svgPoint.x), y: (svgPoint.y) });
   };
   const handleMouseUp = () => {
     isBlockDrag.current = false;

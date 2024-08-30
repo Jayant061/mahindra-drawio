@@ -14,7 +14,7 @@ function Leftbar() {
       <section className="head">
         <span>Add Block or Component and start building SLD</span>
         {/* sbc short for showBlockOrComponent */}
-        <button onClick={() => { setShowDialog("sbc") }}><img src={plusIcon} alt="add img" /></button>
+        <button onClick={() => { showDialog === "" && setShowDialog("sbc") }}><img src={plusIcon} alt="add img" /></button>
       </section>
       {showDialog && <section className="dialogBox">
         {showDialog === "sbc" && <div className="selectBlockOrComponent">
@@ -22,7 +22,7 @@ function Leftbar() {
           <p onClick={() => { setShowDialog("component") }}>Component</p>
         </div>}
         {
-          showDialog === "block" && <CreateBlock />
+          showDialog === "block" && <CreateBlock setShowBox={setShowDialog} />
         }
         {
           showDialog === "component" && <CreateComponent />
@@ -30,9 +30,9 @@ function Leftbar() {
       </section>}
       <section className="BlockList">
         {json.blocks.map((block) => {
-          return <>
-            <BlockCard name={block.name} elements={block.elements} />
-          </>
+          return <React.Fragment key={block.id}>
+            <BlockCard  name={block.name} elements={block.elements} />
+          </React.Fragment>
         })}
       </section>
     </div>

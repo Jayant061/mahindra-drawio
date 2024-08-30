@@ -4,7 +4,7 @@ import EditIcon from '../../assets/MainPageIcons/EditIcon.svg'
 import CopyIcons from '../../assets/MainPageIcons/CopyIcons.svg'
 import DeleteIcon from '../../assets/MainPageIcons/DeleteIcon.svg'
 import Minus from '../../assets/MainPageIcons/MinusCircle.svg'
-import {Assets, Plant} from '../../models/Shape'
+import {Assets,} from '../../models/Shape'
 
 import './BlockCard.css'
 
@@ -36,8 +36,8 @@ const BlockCard = ({name, elements}: BlockCardProps) => {
             </div>
             <div className={isExpanded? "collapsed" : "ItemsList"}>
                 
-                {elements.map((element) => {
-                    return (<div className="listItem">
+                {elements.map((element,index) => {
+                    return (<div className="listItem" key={element.id+index}>
                         <div className="ItemName">
                             <p>{element.name}</p>
                         </div>
