@@ -12,23 +12,7 @@ import StepLine from "../../Components/Lines/StepLine.tsx";
 
 const PlayGround = () => {
   const [shapes, setShapes] = useState<Plant>(SLDData);
-  // const [shapes, setShapes] = useState<Plant>(
-  //   {
-  //     "id": "ksdf",
-  //     "name": "Sld001",
-  //     "type": "plant",
-  //     blocks: [
-  //       {
-  //         "id": "asdf",
-  //         "name": "Block1",
-  //         "type": "plant",
-  //         "x" : 200,
-  //         "y": 300, 
-  //         "elements" : []
-  //       }
-  //     ]
-  //   }
-  // );
+
 
 
   
